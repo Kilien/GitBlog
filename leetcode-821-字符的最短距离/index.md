@@ -1,0 +1,44 @@
+# LeetCode-821-字符的最短距离
+
+# LeetCode-821-字符的最短距离
+## 题目
+给定一个字符串 S 和一个字符 C。返回一个代表字符串 S 中每个字符到字符串 S 中的字符 C 的最短距离的数组。
+
+示例 1:
+> 输入: S = "loveleetcode", C = 'e'  
+> 输出: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]  
+说明:
+
+字符串 S 的长度范围为 [1, 10000]。
+C 是一个单字符，且保证是字符串 S 里的字符。
+S 和 C 中的所有字母均为小写字母。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/shortest-distance-to-a-character
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+## 思路
+1. 遍历数组，找到等于 C 的字符下标，设置位移坐标pos
+2. 遍历数组下标：
+* 依次与 pos 相减取绝对值，再从中选取最小值添加到 ans
+## 代码
+```python
+class Solution:
+    def shortestToChar(self, S: str, C: str) -> List[int]:
+        pos = []
+        for i, v in enumerate(S):
+            if v == C:
+                pos.append(i)
+        #output：【3，5，6，11】
+        ans = []
+        for i in range(len(S)):
+            ans.append(min(abs(t - i) for t in pos))
+
+        return ans
+#[3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0, 3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
+```
+
+## 复杂度
+时间：O(nm)
+空间：O(n)
+

@@ -1,0 +1,169 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>单例模式实现 - Kilien's Blog</title><meta name=Description content="Kilien's Blog"><meta property="og:title" content="单例模式实现"><meta property="og:description" content="Python单例模式(Singleton)的N种实现 很多初学者喜欢用 全局变量 ，因为这比函数的参数传来传去更容易让人理解。确实在很多场景下用全"><meta property="og:type" content="article"><meta property="og:url" content="http://KiLien.github.io/singleton/"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-05-25T11:06:17+08:00"><meta property="article:modified_time" content="2020-05-25T11:06:17+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png"><meta name=twitter:title content="单例模式实现"><meta name=twitter:description content="Python单例模式(Singleton)的N种实现 很多初学者喜欢用 全局变量 ，因为这比函数的参数传来传去更容易让人理解。确实在很多场景下用全"><meta name=application-name content="Kilien"><meta name=apple-mobile-web-app-title content="Kilien"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://KiLien.github.io/singleton/><link rel=prev href=http://KiLien.github.io/swapnodesinpairs/><link rel=next href=http://KiLien.github.io/generatorandyield/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"单例模式实现","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/KiLien.github.io\/singleton\/"},"genre":"posts","keywords":"笔记, Singleton","wordcount":1798,"url":"http:\/\/KiLien.github.io\/singleton\/","datePublished":"2020-05-25T11:06:17+08:00","dateModified":"2020-05-25T11:06:17+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Kilien"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('theme','dark')</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Kilien's Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src=/images/logo.png data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x" data-sizes=auto alt=/images/logo.png title=/images/logo.png>Kilien</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Kilien's Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src=/images/logo.png data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x" data-sizes=auto alt=/images/logo.png title=/images/logo.png>Kilien</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">单例模式实现</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=" author" class=author><i class="fas fa-user-circle fa-fw"></i>Kilien</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-05-25>2020-05-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1798 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#使用函数装饰器实现单例><strong>使用函数装饰器实现单例</strong></a></li><li><a href=#使用类装饰器实现单例><strong>使用类装饰器实现单例</strong></a></li><li><a href=#newmetaclass-关键字><strong>New、Metaclass 关键字</strong></a></li><li><a href=#使用-new-关键字实现单例模式><strong>使用</strong> <strong>new</strong> <strong>关键字实现单例模式</strong></a></li><li><a href=#使用-metaclass-实现单例模式><strong>使用</strong> <strong>metaclass</strong> <strong>实现单例模式</strong></a></li><li><a href=#小结><strong>小结</strong></a></li></ul></nav></div></div><div class=content id=content><h1 id=python单例模式singleton的n种实现>Python单例模式(Singleton)的N种实现</h1><p>很多初学者喜欢用 <strong>全局变量</strong> ，因为这比函数的参数传来传去更容易让人理解。确实在很多场景下用全局变量很方便。不过如果代码规模增大，并且有多个文件的时候，全局变量就会变得比较混乱。你可能不知道在哪个文件中定义了相同类型甚至重名的全局变量，也不知道这个变量在程序的某个地方被做了怎样的操作。</p><p>因此对于这种情况，有种更好的实现方式：</p><p><strong>单例（Singleton）</strong></p><p>单例是一种 <strong>设计模式</strong> ，应用该模式的类只会生成一个实例。</p><p>单例模式保证了在程序的不同位置都 <strong>可以且仅可以取到同一个对象实例</strong> ：如果实例不存在，会创建一个实例；如果已存在就会返回这个实例。因为单例是一个类，所以你也可以为其提供相应的操作方法，以便于对这个实例进行管理。</p><p>举个例子来说，比如你开发一款游戏软件，游戏中需要有“场景管理器”这样一种东西，用来管理游戏场景的切换、资源载入、网络连接等等任务。这个管理器需要有多种方法和属性，在代码中很多地方会被调用，且被调用的必须是同一个管理器，否则既容易产生冲突，也会浪费资源。这种情况下，单例模式就是一个很好的实现方法。</p><p>单例模式广泛应用于各种开发场景，对于开发者而言是必须掌握的知识点，同时在很多面试中，也是常见问题。本篇文章总结了目前主流的实现单例模式的方法供读者参考。</p><p>希望看过此文的同学，在以后被面到此问题时，能直接皮一下面试官，“我会 4 种单例模式实现，你想听哪一种？”</p><p>以下是实现方法索引：</p><ul><li>使用函数装饰器实现单例</li><li>使用类装饰器实现单例</li><li>使用 <strong>new</strong> 关键字实现单例</li><li>使用 metaclass 实现单例</li></ul><h2 id=使用函数装饰器实现单例><strong>使用函数装饰器实现单例</strong></h2><p>以下是实现代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>singleton</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+    <span class=n>_instance</span> <span class=o>=</span> <span class=p>{}</span>
+    
+    <span class=k>def</span> <span class=nf>inner</span><span class=p>():</span>
+        <span class=k>if</span> <span class=bp>cls</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>_instance</span><span class=p>:</span>
+            <span class=n>_instance</span><span class=p>[</span><span class=bp>cls</span><span class=p>]</span> <span class=o>=</span> <span class=bp>cls</span><span class=p>()</span> 
+        <span class=k>return</span> <span class=n>_instance</span><span class=p>[</span><span class=bp>cls</span><span class=p>]</span> 
+    <span class=k>return</span> <span class=n>inner</span> 
+
+<span class=nd>@singleton</span>
+<span class=k>class</span> <span class=nc>Cls</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=k>pass</span> 
+
+<span class=n>cls1</span> <span class=o>=</span> <span class=n>Cls</span><span class=p>()</span>
+<span class=n>cls2</span> <span class=o>=</span> <span class=n>Cls</span><span class=p>()</span>
+<span class=k>print</span><span class=p>(</span><span class=nb>id</span><span class=p>(</span><span class=n>cls1</span><span class=p>)</span> <span class=o>==</span> <span class=nb>id</span><span class=p>(</span><span class=n>cls2</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>True
+</code></pre></td></tr></table></div></div><p>在 Python 中，id 关键字可用来查看对象在内存中的存放位置，这里 cls1 和 cls2 的 id 值相同，说明他们指向了同一个对象。</p><p>关于装饰器的知识，有不明白的同学可以查看之前的文章 <a href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166480%26idx%3D2%26sn%3Dbe7349921b91730a8c717f6ab28dad97%26chksm%3Dbe4b59a8893cd0bee407e3d8a1b7bec44d7571623c355a37f352d5cf9e104d986af6f5b5e1fe%26scene%3D21%23wechat_redirect" target=_blank rel="noopener noreffer">【编程课堂】装饰器浅析</a> 或者使用搜索引擎再学习一遍。代码中比较巧妙的一点是:</p><p>使用不可变的 <strong>类地址</strong> 作为键，其实例作为值，每次创造实例时，首先查看该类是否存在实例，存在的话直接返回该实例即可，否则新建一个实例并存放在字典中。</p><h2 id=使用类装饰器实现单例><strong>使用类装饰器实现单例</strong></h2><p>代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Singleton</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=bp>cls</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>_cls</span> <span class=o>=</span> <span class=bp>cls</span> 
+        <span class=bp>self</span><span class=o>.</span><span class=n>_instance</span> <span class=o>=</span> <span class=p>{}</span> 
+    <span class=k>def</span> <span class=fm>__call__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_cls</span> <span class=ow>not</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_instance</span><span class=p>:</span>
+            <span class=bp>self</span><span class=o>.</span><span class=n>_instance</span><span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>_cls</span><span class=p>]</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_cls</span><span class=p>()</span> 
+        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_instance</span><span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>_cls</span><span class=p>]</span> 
+
+<span class=nd>@Singleton</span>
+<span class=k>class</span> <span class=nc>Cls2</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span> 
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span> 
+        <span class=k>pass</span> 
+        
+<span class=n>cls1</span> <span class=o>=</span> <span class=n>Cls2</span><span class=p>()</span>
+<span class=n>cls2</span> <span class=o>=</span> <span class=n>Cls2</span><span class=p>()</span>
+<span class=k>print</span><span class=p>(</span><span class=nb>id</span><span class=p>(</span><span class=n>cls1</span><span class=p>)</span> <span class=o>==</span> <span class=nb>id</span><span class=p>(</span><span class=n>cls2</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><p>同时，由于是面对对象的，这里还可以这么用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Cls3</span><span class=p>():</span> 
+    <span class=k>pass</span> 
+
+<span class=n>Cls3</span> <span class=o>=</span> <span class=n>Singleton</span><span class=p>(</span><span class=n>Cls3</span><span class=p>)</span>
+<span class=n>cls3</span> <span class=o>=</span> <span class=n>Cls3</span><span class=p>()</span>
+<span class=n>cls4</span> <span class=o>=</span> <span class=n>Cls3</span><span class=p>()</span>
+<span class=k>print</span><span class=p>(</span><span class=nb>id</span><span class=p>(</span><span class=n>cls3</span><span class=p>)</span> <span class=o>==</span> <span class=nb>id</span><span class=p>(</span><span class=n>cls4</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><p>使用 类装饰器实现单例的原理和 函数装饰器 实现的原理相似，理解了上文，再理解这里应该不难。</p><h2 id=newmetaclass-关键字><strong>New、Metaclass 关键字</strong></h2><p>在接着说另外两种方法之前，需要了解在 Python 中一个类和一个实例是通过哪些方法以怎样的顺序被创造的。</p><p>简单来说， <strong>元类</strong> ( <strong>metaclass</strong> ) 可以通过方法 <strong><strong>metaclass</strong></strong> 创造了 <strong>类(class)</strong> ，而 <strong>类(class)</strong> 通过方法 <strong><strong>new</strong></strong> 创造了 <strong>实例(instance)</strong> 。</p><p>在单例模式应用中，在创造类的过程中或者创造实例的过程中稍加控制达到最后产生的实例都是一个对象的目的。</p><p>本文主讲单例模式，所以对这个 topic 只会点到为止，有感兴趣的同学可以在网上搜索相关内容，几篇参考文章：</p><h2 id=使用-new-关键字实现单例模式><strong>使用</strong> <strong>new</strong> <strong>关键字实现单例模式</strong></h2><p>使用 <strong>new</strong> 方法在创造实例时进行干预，达到实现单例模式的目的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Single</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+    <span class=n>_instance</span> <span class=o>=</span> <span class=bp>None</span> 
+    
+    <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kw</span><span class=p>):</span>
+        <span class=k>if</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_instance</span> <span class=ow>is</span> <span class=bp>None</span><span class=p>:</span>
+            <span class=bp>cls</span><span class=o>.</span><span class=n>_instance</span> <span class=o>=</span> <span class=nb>object</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kw</span><span class=p>)</span>
+        <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_instance</span> 
+    
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=k>pass</span>
+        
+<span class=n>single1</span> <span class=o>=</span> <span class=n>Single</span><span class=p>()</span>
+<span class=n>single2</span> <span class=o>=</span> <span class=n>Single</span><span class=p>()</span>
+<span class=k>print</span><span class=p>(</span><span class=nb>id</span><span class=p>(</span><span class=n>single1</span><span class=p>)</span> <span class=o>==</span> <span class=nb>id</span><span class=p>(</span><span class=n>single2</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><p>在理解到 <strong>new</strong> 的应用后，理解单例就不难了，这里使用了</p><p>来存放实例，如果 _instance 为 None，则新建实例，否则直接返回 _instance 存放的实例。</p><h2 id=使用-metaclass-实现单例模式><strong>使用</strong> <strong>metaclass</strong> <strong>实现单例模式</strong></h2><p>同样，我们在类的创建时进行干预，从而达到实现单例的目的。</p><p>在实现单例之前，需要了解使用 type 创造类的方法，代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>func</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+    <span class=k>print</span><span class=p>(</span><span class=s2>&#34;do sth&#34;</span><span class=p>)</span> 
+    
+<span class=n>Klass</span> <span class=o>=</span> <span class=nb>type</span><span class=p>(</span><span class=s2>&#34;Klass&#34;</span><span class=p>,</span> <span class=p>(),</span> <span class=p>{</span><span class=s2>&#34;func&#34;</span><span class=p>:</span> <span class=n>func</span><span class=p>})</span> 
+
+<span class=n>c</span> <span class=o>=</span> <span class=n>Klass</span><span class=p>()</span>
+<span class=n>c</span><span class=o>.</span><span class=n>func</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><p>以上，我们使用 type 创造了一个类出来。这里的知识是 mataclass 实现单例的基础。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Singleton</span><span class=p>(</span><span class=nb>type</span><span class=p>):</span>
+    <span class=n>_instances</span> <span class=o>=</span> <span class=p>{}</span>
+    
+    <span class=k>def</span> <span class=fm>__call__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+        <span class=k>if</span> <span class=bp>cls</span> <span class=ow>not</span> <span class=ow>in</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_instances</span><span class=p>:</span>
+            <span class=bp>cls</span><span class=o>.</span><span class=n>_instances</span><span class=p>[</span><span class=bp>cls</span><span class=p>]</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>Singleton</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__call__</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
+            
+        <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_instances</span><span class=p>[</span><span class=bp>cls</span><span class=p>]</span> 
+
+<span class=k>class</span> <span class=nc>Cls4</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>Singleton</span><span class=p>):</span>
+    <span class=k>pass</span> 
+    
+<span class=n>cls1</span> <span class=o>=</span> <span class=n>Cls4</span><span class=p>()</span>
+<span class=n>cls2</span> <span class=o>=</span> <span class=n>Cls4</span><span class=p>()</span>
+<span class=k>print</span><span class=p>(</span><span class=nb>id</span><span class=p>(</span><span class=n>cls1</span><span class=p>)</span> <span class=o>==</span> <span class=nb>id</span><span class=p>(</span><span class=n>cls2</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><p>这里，我们将 metaclass 指向 Singleton 类，让 Singleton 中的 type 来创造新的 Cls4 实例。</p><h2 id=小结><strong>小结</strong></h2><p>本文虽然是讲单例模式，但在实现单例模式的过程中，涉及到了蛮多高级 Python 语法，包括装饰器、元类、new、type 甚至 super 等等。对于新手同学可能难以理解，其实在工程项目中并不需要你掌握的面面俱到，掌握其中一种，剩下的作为了解即可。</p><p><em>by 周鑫鑫</em></p><p>关于更多的设计模式，给初学者推荐《 <strong>Head First 设计模式</strong> 》（Head First Design Patterns），此书浅显易懂，在 Head First 系列书籍里面也算是很好的一本。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2020-05-25</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/singleton/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现 data-via=Linerzore data-hashtags=笔记,Singleton><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=http://KiLien.github.io/singleton/ data-hashtag=笔记><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=http://KiLien.github.io/singleton/ data-title=单例模式实现><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%AC%94%E8%AE%B0/>笔记</a>,&nbsp;<a href=/tags/singleton/>Singleton</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/swapnodesinpairs/ class=prev rel=prev title=LeetCode-24-两两交换链表中的节点><i class="fas fa-angle-left fa-fw"></i>LeetCode-24-两两交换链表中的节点</a>
+<a href=/generatorandyield/ class=next rel=next title=生成器的运用>生成器的运用<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.82.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Kilien</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:20},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"Comment",lightTheme:"github-light",repo:"KiLien/KiLien.github.io"}},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},lightGallery:{actualSize:!1,exThumbImage:"data-thumbnail",hideBarsDelay:2e3,selector:".lightgallery",speed:400,thumbContHeight:80,thumbWidth:80,thumbnail:!0},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
