@@ -160,11 +160,11 @@ theme = "LoveIt"
     [params.home.profile]
       enable = true
       # Gravatar 邮箱，用于优先在主页显示的头像
-      gravatarEmail = "ki.lien@foxmail.com"
+      gravatarEmail = ""
       # 主页显示头像的 URL
-      avatarURL = "/images/Wechat.png"
+      avatarURL = "https://cdn.jsdelivr.net/gh/KiLien/Pics/img/avatar.png"
       # 是否启用头像挂件
-      avatarPluginURL = "/avatar-plug/bilibili_49.png"
+      avatarPluginURL = "/avatar-plug/bilibili_2.png"
       # 是否启用头像挂件自动刷新
       avatarPluginFlush = true
       # 点击频率，点击几次就换挂件

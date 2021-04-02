@@ -12,8 +12,18 @@ nav#TableOfContents ol {
   }
 }
 
-.color_white {
+.archive-section {
   background-color: #fff;
+  opacity: 0.9;
+  padding: 2rem 3rem;
+  .single-title {
+    text-align: right;
+  }
+
+  .group-title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 /* 拉姆蕾姆回到顶部或底部按钮 */

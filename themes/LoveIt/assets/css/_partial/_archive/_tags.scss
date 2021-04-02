@@ -1,12 +1,15 @@
 .tag-cloud-tags {
-  margin: 10px 0;
+  background-color: #fff;
+  opacity: 0.90;
+  padding: 3rem 3.5rem;
+  margin: 3rem 0;
 
   @include link(true, true);
 
   a {
     display: inline-block;
     position: relative;
-    margin: 5px 10px;
+    margin: .5rem 1rem;
     @include overflow-wrap(break-word);
     @include transition(all ease-out 0.3s);
 
