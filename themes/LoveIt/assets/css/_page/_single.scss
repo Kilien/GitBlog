@@ -1,6 +1,11 @@
 @import "../_partial/_single/toc";
 
 .single {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  background: white;
+  opacity: .90;
   .single-title {
     margin: 1rem 0 .5rem;
     font-size: 1.6rem;

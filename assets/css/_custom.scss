@@ -1,0 +1,123 @@
+/* 目录 */
+nav#TableOfContents ol {
+  padding-inline-start: 30px;
+
+  & ol {
+      padding-inline-start: 25px;
+      display: none;
+  }
+
+  & li.has-active ol {
+      display: block;
+  }
+}
+
+.color_white {
+  background-color: #fff;
+}
+
+/* 拉姆蕾姆回到顶部或底部按钮 */
+.sidebar_wo {
+    position:fixed;
+    line-height:0;
+    bottom:0;
+    z-index:1000
+}
+#leimu {
+    left:0;
+    -webkit-transition:all .3s ease-in-out;
+    transition:all .3s ease-in-out;
+    -webkit-transform:translate(-7px,7px);
+    -ms-transform:translate(-7px,7px);
+    transform:translate(-7px,7px)
+}
+#lamu {
+    -webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;
+    -webkit-transform:translate(7px,7px);
+    -ms-transform:translate(7px,7px);
+    transform:translate(7px,7px);
+    right:0
+}
+#leimu:hover {
+    -webkit-transform:translate(0,0);
+    -ms-transform:translate(0,0);
+    transform:translate(0,0)
+}
+#lamu:hover {
+    -webkit-transform:translate(0,0);
+    -ms-transform:translate(0,0);
+    transform:translate(0,0)
+}
+.sidebar_wo img {
+    cursor:pointer;
+}
+@media only screen and (max-width:1024px) {
+    .sidebar_wo{display:none}
+}
+/* 首页头像 */
+/* bilibili头像挂件 */
+img.site-avatar-plug-bilibili {
+    position: absolute;
+    display: block;
+    margin: -2rem !important;
+    padding: 0;
+    width: 9rem !important;
+    max-width: 168px;
+    height: auto;
+    box-shadow: none !important;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 头像旋转 */
+.home .home-profile .home-avatar img {
+    width: 5rem;
+
+  /* 设置循环动画
+  [animation: 
+	(play)动画名称
+	(2s)动画播放时长单位秒或微秒
+	(ease-out)动画播放的速度曲线为以低速结束 
+	(1s)等待1秒然后开始动画
+	(1)动画播放次数(infinite为循环播放) ]*/
+ 
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1.0s ease-out;
+  -moz-transition: -moz-transform 1.0s ease-out;
+  transition: transform 1.0s ease-out;
+    &:hover {
+      /* 鼠标经过停止头像旋转 
+      -webkit-animation-play-state:paused;
+      animation-play-state:paused;*/
+
+      /* 鼠标经过头像旋转360度 */
+      -webkit-transform: rotateZ(400deg);
+      -moz-transform: rotateZ(400deg);
+      transform: rotateZ(400deg);
+    }
+}
+/* Z 轴旋转动画 */
+@-webkit-keyframes play {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(-360deg);
+  }
+}
+@-moz-keyframes play {
+  0% {
+    -moz-transform: rotateZ(0deg);
+  }
+  100% {
+    -moz-transform: rotateZ(-360deg);
+  }
+}
+@keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}

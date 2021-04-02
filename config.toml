@@ -5,6 +5,8 @@ defaultContentLanguage = "zh-cn"
 languageCode = "zh-CN"
 # 是否包括中日韩文字
 hasCJKLanguage = true
+# 是否禁止将网站路径转换成小写
+disablePathToLower = true
 # 网站标题
 title = "Kilien's Blog"
 
@@ -161,6 +163,14 @@ theme = "LoveIt"
       gravatarEmail = "ki.lien@foxmail.com"
       # 主页显示头像的 URL
       avatarURL = "/images/Wechat.png"
+      # 是否启用头像挂件
+      avatarPluginURL = "/avatar-plug/bilibili_49.png"
+      # 是否启用头像挂件自动刷新
+      avatarPluginFlush = true
+      # 点击频率，点击几次就换挂件
+      avatarPluginFrequency = 1
+      # 头像挂件总数
+      avatarPluginCount = 57
       #  主页显示的网站标题 (支持 HTML 格式)
       title = "KilienBlog"
       # 主页显示的网站副标题
@@ -457,6 +467,10 @@ theme = "LoveIt"
   #  网站分析配置
   [params.analytics]
     enable = false
+    # Baidu Analytics
+    # 百度统计
+    [params.analytics.baidu]
+      id = ""
     # Google Analytics
     [params.analytics.google]
       id = ""
@@ -484,7 +498,7 @@ theme = "LoveIt"
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
-    data = ""
+    img = "https://cdn.jsdelivr.net/gh/KiLien/Pics@master"
 
   #  兼容性设置
   [params.compatibility]
