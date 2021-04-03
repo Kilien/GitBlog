@@ -10,8 +10,7 @@ categories: ["GitHub"]
 
 最近，GitHub 上线了一个全新的个人页功能，可以显示一个自定义的 `README.MD` 在个人主页。
 效果如下：
-
-![]({{< param cdn.img >}}/iShot/git-profile-01.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/git-profile-01.png" >}}
 
 要激活此功能，需要新建一个与自己 ID 同名的 Repository，新 Repo 里的 `README.MD` 将出现在你的首页。
 
@@ -21,7 +20,7 @@ categories: ["GitHub"]
 
 ## 如何创造自己的 README.MD
 ### 1. 创建 Repository
-![]({{< param cdn.img >}}/iShot/git-profile-02.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/git-profile-02.png" >}}
 
 **创建新的 Repository**，仓库名为自己的用户名，形如 `仓库名/用户名` -> `hayschan/hayschan`
 
@@ -42,7 +41,7 @@ categories: ["GitHub"]
 这两个项目可以帮你轻松创建 GitHub Readme 文件，你可以直接复制/粘贴到你自己的 README 文件。
 
 你可以加入诸如标题、字幕、技能、横幅图片、附加信息、社交媒体链接、徽章和GitHub统计等内容。
-![Github Readme Generator](https://camo.githubusercontent.com/37ecf5fc6ed20ef415e3e81bb9104771e7557ca3d828a06dee981d4c18fe9212/68747470733a2f2f617274757273736d69726e6f76732e6769746875622e696f2f6769746875622d70726f66696c652d726561646d652d67656e657261746f722f696d616765732f6769662e6769663f763d313233)
+{{< image src="https://camo.githubusercontent.com/37ecf5fc6ed20ef415e3e81bb9104771e7557ca3d828a06dee981d4c18fe9212/68747470733a2f2f617274757273736d69726e6f76732e6769746875622e696f2f6769746875622d70726f66696c652d726561646d652d67656e657261746f722f696d616765732f6769662e6769663f763d313233" title="Github Readme Generator">}}
 
 ### [GitHub Readme Stats](https://github.com/anuraghazra/github-readme-stats/blob/master/docs/readme_cn.md)
 在你的 README 中动态生成的 GitHub 统计信息
@@ -69,7 +68,7 @@ categories: ["GitHub"]
 
 `![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)`
 ##### 所有现有主题
-![]({{< param cdn.img >}}/iShot/git-profile-03.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/git-profile-03.png" >}}
 > dark, radical, merko, gruvbox, tokyonight, onedark, cobalt, synthwave, highcontrast, dracula
 ##### [预览主题](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)
 
@@ -88,7 +87,7 @@ categories: ["GitHub"]
 <!-- BLOG-POST-LIST:END -->
 ```
 - 创建Github Action，爬取内容。
-![]({{< param cdn.img >}}/iShot/git-profile-04.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/git-profile-04.png" >}}
 - 在工作流文件夹内创建一个名为blog-post-workflow.yml的新文件，内容如下。
 ```
 name: Latest blog post workflow
@@ -106,7 +105,7 @@ jobs:
         with:
           feed_list: "https://KiLien.github.io/index.xml"
 ```
-![]({{< param cdn.img >}}/iShot/git-profile-05.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/git-profile-05.png" >}}
 - 用你自己的rss feed urls替换上面的url列表。
 - 提交并等待它自动运行，或者你也可以手动触发它以立即看到结果。
 
