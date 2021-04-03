@@ -1,5 +1,5 @@
 ---
-title: "PicGo+GitHub：打造你自己的图床"
+title: "PicGo+GitHub：打造自己的图床"
 date: "2021-04-02 23:06:22.890 +0800"
 draft: false
 tags: ["图床","GitHub","PicGo"]
@@ -13,7 +13,7 @@ categories: ["GitHub"]
 解决问题的思路就是，将本地的文件，或者剪切板上面的截图发送图床，然后生成在线图片的链接，这样就可以让`Markdown`文档飞起来了，走到哪就可以用到哪😊。
 
 ![]({{< param cdn.img >}}/iShot/ishot-01.png) 
-![]({{< param cdn.img >}}/iShot/ishot-01.png)
+![]({{< param cdn.img >}}/iShot/ishot-02.png)
 
 在众多的图床中，我选择的是`GitHub`图床，这可拓展定制。
 
