@@ -7,8 +7,8 @@
 
 解决问题的思路就是，将本地的文件，或者剪切板上面的截图发送图床，然后生成在线图片的链接，这样就可以让`Markdown`文档飞起来了，走到哪就可以用到哪😊。
 
-![]({{< param cdn.img >}}/iShot/ishot-01.png) 
-![]({{< param cdn.img >}}/iShot/ishot-02.png)
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-01.png" >}}
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-02.png" >}}
 
 在众多的图床中，我选择的是`GitHub`图床，这可拓展定制。
 
@@ -19,11 +19,11 @@
 
 ### 2. 创建 Repository
 
-![]({{< param cdn.img >}}/iShot/ishot-03.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-03.png" >}}
 
 点击`"New repository"`按钮
 
-![]({{< param cdn.img >}}/iShot/ishot-04.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-04.png" >}}
 
 > 第 4 步，repository 初始化 README 文件,可选
 > .gitignore 添加忽略文件夹，可选
@@ -33,19 +33,19 @@
 
 回到主页，点击`"Settings"`按钮
 
-![]({{< param cdn.img >}}/iShot/ishot-05.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-05.png" >}}
 
 进入页面后，点击 `"Developer settings"` 按钮
 
-![]({{< param cdn.img >}}/iShot/ishot-06.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-06.png" >}}
 
 点击 `"Personal access tokens"` 按钮
 
-![]({{< param cdn.img >}}/iShot/ishot-07.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-07.png" >}}
 
 创建新的 `Token`
 
-![]({{< param cdn.img >}}/iShot/ishot-08.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-08.png" >}}
 
 填写描述，选择`"repo"`权限，然后点击`"Generate token"`,至少选择 **repo** 该项
 
@@ -89,7 +89,7 @@ Github在图床里，毫无疑问是扮演一个“仓库”的角色。
 
 之后按照这个配置格式配置即可！
 
-![]({{< param cdn.img >}}/iShot/ishot-09.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-09.png" >}}
 
 *   设定仓库名的时候，按照 “账户名 / 仓库名“ 的格式填写
 *   分支名统一填写`master`
@@ -103,7 +103,7 @@ Github在图床里，毫无疑问是扮演一个“仓库”的角色。
 
 `PicGo`支持自定义快捷键，使用方法见[配置手册](https://picgo.github.io/PicGo-Doc/zh/guide/config.html)。
 
-![]({{< param cdn.img >}}/iShot/ishot-10.png) 
+{{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics@master/iShot/ishot-10.png" >}}
 
 > 注：可以将快捷键设置为 ctrl+shift+c
 
