@@ -3,4 +3,8 @@
   line-height: 3rem;
   @include transform(translateY(30vh));
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  opacity: 0.90;
 }
