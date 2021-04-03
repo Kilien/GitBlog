@@ -26,34 +26,40 @@ nav#TableOfContents ol {
   }
 }
 
-/* 拉姆蕾姆回到顶部或底部按钮 */
+/* 风铃🎐回到顶部或底部按钮 */
 .sidebar_wo {
     position:fixed;
     line-height:0;
-    bottom:0;
-    z-index:1000
+    top:3rem;
+    width: 5rem;
+    height: 5rem;
+    z-index:1000;
+    .wind-chimes-img{
+      width: 100%;
+      height: 100%;
+    }
 }
-#leimu {
-    left:0;
+#left-wind-chimes {
+    left:3rem;
     -webkit-transition:all .3s ease-in-out;
     transition:all .3s ease-in-out;
     -webkit-transform:translate(-7px,7px);
     -ms-transform:translate(-7px,7px);
     transform:translate(-7px,7px)
 }
-#lamu {
+#right-wind-chimes {
     -webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;
     -webkit-transform:translate(7px,7px);
     -ms-transform:translate(7px,7px);
     transform:translate(7px,7px);
     right:0
 }
-#leimu:hover {
+#left-wind-chimes:hover {
     -webkit-transform:translate(0,0);
     -ms-transform:translate(0,0);
     transform:translate(0,0)
 }
-#lamu:hover {
+#right-wind-chimes:hover {
     -webkit-transform:translate(0,0);
     -ms-transform:translate(0,0);
     transform:translate(0,0)
