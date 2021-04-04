@@ -12,6 +12,19 @@ nav#TableOfContents ol {
   }
 }
 
+/* 顶部阅读进度条 */
+.top-scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  width: 0;
+  height: 3px;
+  background: #39daef;
+} 
+
+/* 标签/分类背景层 */
 .archive-section {
   background-color: #fff;
   opacity: 0.9;
@@ -70,6 +83,7 @@ nav#TableOfContents ol {
 @media only screen and (max-width:1024px) {
     .sidebar_wo{display:none}
 }
+
 /* 首页头像 */
 /* bilibili头像挂件 */
 img.site-avatar-plug-bilibili {
