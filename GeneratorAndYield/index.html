@@ -25,7 +25,7 @@
 <span class=c1># print(b)</span>
 <span class=k>for</span> <span class=n>index</span><span class=p>,</span><span class=n>i</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>info</span><span class=p>):</span>
     <span class=n>info</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>+=</span><span class=mi>1</span>
-<span class=k>print</span><span class=p>(</span><span class=n>info</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>info</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><p>方法二（一般）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -33,15 +33,15 @@
 </span><span class=lnt>5
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=n>info</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>]</span>
 <span class=n>a</span> <span class=o>=</span> <span class=nb>map</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span><span class=n>x</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>info</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
 <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>a</span><span class=p>:</span>
-    <span class=k>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+    <span class=nb>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><p>方法三（高级）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=n>info</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>]</span>
 <span class=n>a</span> <span class=o>=</span> <span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>)]</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><h3 id=生成器>生成器</h3><h4 id=什么是生成器>什么是生成器？</h4><p>通过列表生成式，我们可以直接创建一个列表，但是，受到内存限制，列表容量肯定是有限的，而且创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。</p><p>所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间，在Python中，这种一边循环一边计算的机制，称为生成器：generator</p><p>生成器是一个特殊的程序，可以被用作控制循环的迭代行为，python中生成器是迭代器的一种，使用yield返回值函数，每次调用yield会暂停，而可以使用next()函数和send()函数恢复生成器。</p><p>生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器看起来像是一个函数，但是表现得却像是迭代器</p><h4 id=python中的生成器>python中的生成器</h4><p>　　要创建一个generator，有很多种方法，第一种方法很简单， <strong>只有把一个列表生成式的[]中括号改为（）小括号，就创建一个generator</strong></p><p>举例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -54,12 +54,12 @@
 </span><span class=lnt>10
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=c1>#列表生成式</span>
 <span class=n>lis</span> <span class=o>=</span> <span class=p>[</span><span class=n>x</span><span class=o>*</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>)]</span>
-<span class=k>print</span><span class=p>(</span><span class=n>lis</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>lis</span><span class=p>)</span>
 <span class=c1>#生成器</span>
 <span class=n>generator_ex</span> <span class=o>=</span> <span class=p>(</span><span class=n>x</span><span class=o>*</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>)</span>
 
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>16</span><span class=p>,</span> <span class=mi>25</span><span class=p>,</span> <span class=mi>36</span><span class=p>,</span> <span class=mi>49</span><span class=p>,</span> <span class=mi>64</span><span class=p>,</span> <span class=mi>81</span><span class=p>]</span>
 <span class=o>&lt;</span><span class=n>generator</span> <span class=nb>object</span> <span class=o>&lt;</span><span class=n>genexpr</span><span class=o>&gt;</span> <span class=n>at</span> <span class=mh>0x000002A4CBF9EBA0</span><span class=o>&gt;</span>
 </code></pre></td></tr></table></div></div><p>那么创建list和generator_ex，的区别是什么呢？从表面看就是[ ]和（）,但是结果却不一样，一个打印出来是列表（因为是列表生成式），而第二个打印出来却是&lt;generator object <genexpr>at 0x000002A4CBF9EBA0>，那么如何打印出来generator_ex的每一个元素呢？</p><p>如果要一个个打印出来，可以通过next（）函数获得generator的下一个返回值：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
@@ -95,18 +95,18 @@
 </span><span class=lnt>31
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=c1>#生成器</span>
 <span class=n>generator_ex</span> <span class=o>=</span> <span class=p>(</span><span class=n>x</span><span class=o>*</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
-<span class=err>结果：</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=mi>0</span>
 <span class=mi>1</span>
 <span class=mi>4</span>
@@ -121,7 +121,7 @@
 
   <span class=n>File</span> <span class=s2>&#34;列表生成式.py&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>42</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
 
-    <span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
+    <span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>generator_ex</span><span class=p>))</span>
 
 <span class=ne>StopIteration</span>
 </code></pre></td></tr></table></div></div><p>大家可以看到，generator保存的是算法，每次调用next(generaotr_ex)就计算出他的下一个元素的值，直到计算出最后一个元素，没有更多的元素时，抛出StopIteration的错误，而且上面这样不断调用是一个不好的习惯，正确的方法是使用for循环，因为generator也是可迭代对象：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
@@ -143,9 +143,9 @@
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=c1>#生成器</span>
 <span class=n>generator_ex</span> <span class=o>=</span> <span class=p>(</span><span class=n>x</span><span class=o>*</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
 <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>generator_ex</span><span class=p>:</span>
-    <span class=k>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+    <span class=nb>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
     
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=mi>0</span>
 <span class=mi>1</span>
 <span class=mi>4</span>
@@ -173,11 +173,11 @@
     <span class=k>while</span> <span class=n>n</span> <span class=o>&lt;</span> <span class=nb>max</span><span class=p>:</span>
         <span class=n>a</span><span class=p>,</span><span class=n>b</span> <span class=o>=</span><span class=n>b</span><span class=p>,</span><span class=n>a</span><span class=o>+</span><span class=n>b</span>
         <span class=n>n</span> <span class=o>=</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span>
-        <span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
     <span class=k>return</span> <span class=s1>&#39;done&#39;</span>
 
 <span class=n>a</span> <span class=o>=</span> <span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
 </code></pre></td></tr></table></div></div><p>a,b = b ,a+b 其实相当于 t =a+b ,a =b ,b =t ，所以不必写显示写出临时变量t，就可以输出斐波那契数列的前N个数字。上面输出的结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -239,7 +239,7 @@
     <span class=k>return</span> <span class=s1>&#39;done&#39;</span>
 
 <span class=n>a</span> <span class=o>=</span> <span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
 </code></pre></td></tr></table></div></div><p>但是返回的不再是一个值，而是一个生成器，和上面的例子一样，大家可以看一下结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>&lt;generator object fib at 0x000001C03AC34FC0&gt;
 </code></pre></td></tr></table></div></div><p>那么这样就不占内存了，这里说一下generator和函数的执行流程，函数是顺序执行的，遇到return语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次被next（）调用时候从上次的返回yield语句处急需执行，也就是用多少，取多少，不占内存。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
@@ -276,20 +276,20 @@
     <span class=k>return</span> <span class=s1>&#39;done&#39;</span>
 
 <span class=n>a</span> <span class=o>=</span> <span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>__next__</span><span class=p>())</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>__next__</span><span class=p>())</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>__next__</span><span class=p>())</span>
-<span class=k>print</span><span class=p>(</span><span class=s2>&#34;可以顺便干其他事情&#34;</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>__next__</span><span class=p>())</span>
-<span class=k>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>__next__</span><span class=p>())</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=fm>__next__</span><span class=p>())</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=fm>__next__</span><span class=p>())</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=fm>__next__</span><span class=p>())</span>
+<span class=nb>print</span><span class=p>(</span><span class=s2>&#34;可以顺便干其他事情&#34;</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=fm>__next__</span><span class=p>())</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=fm>__next__</span><span class=p>())</span>
 
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=o>&lt;</span><span class=n>generator</span> <span class=nb>object</span> <span class=n>fib</span> <span class=n>at</span> <span class=mh>0x0000023A21A34FC0</span><span class=o>&gt;</span>
 <span class=mi>1</span>
 <span class=mi>1</span>
 <span class=mi>2</span>
-<span class=err>可以顺便干其他事情</span>
+<span class=n>可以顺便干其他事情</span>
 <span class=mi>3</span>
 <span class=mi>5</span>
 </code></pre></td></tr></table></div></div><p>　　在上面fib的例子，我们在循环过程中不断调用 <code>yield</code> ，就会不断中断。当然要给循环设置一个条件来退出循环，不然就会产生一个无限数列出来。同样的，把函数改成generator后，我们基本上从来不会用 <code>next()</code> 来获取下一个返回值，而是直接使用 <code>for</code> 循环来迭代：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
@@ -317,9 +317,9 @@
         <span class=n>n</span> <span class=o>=</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span>
     <span class=k>return</span> <span class=s1>&#39;done&#39;</span>
 <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>fib</span><span class=p>(</span><span class=mi>6</span><span class=p>):</span>
-    <span class=k>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+    <span class=nb>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
     
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=mi>1</span>
 <span class=mi>1</span>
 <span class=mi>2</span>
@@ -358,22 +358,22 @@
         <span class=n>n</span> <span class=o>=</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span>
     <span class=k>return</span> <span class=s1>&#39;done&#39;</span>
 <span class=n>g</span> <span class=o>=</span> <span class=n>fib</span><span class=p>(</span><span class=mi>6</span><span class=p>)</span>
-<span class=k>while</span> <span class=bp>True</span><span class=p>:</span>
+<span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
     <span class=k>try</span><span class=p>:</span>
         <span class=n>x</span> <span class=o>=</span> <span class=nb>next</span><span class=p>(</span><span class=n>g</span><span class=p>)</span>
-        <span class=k>print</span><span class=p>(</span><span class=s1>&#39;generator: &#39;</span><span class=p>,</span><span class=n>x</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;generator: &#39;</span><span class=p>,</span><span class=n>x</span><span class=p>)</span>
     <span class=k>except</span> <span class=ne>StopIteration</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
-        <span class=k>print</span><span class=p>(</span><span class=s2>&#34;生成器返回值：&#34;</span><span class=p>,</span><span class=n>e</span><span class=o>.</span><span class=n>value</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;生成器返回值：&#34;</span><span class=p>,</span><span class=n>e</span><span class=o>.</span><span class=n>value</span><span class=p>)</span>
         <span class=k>break</span>
 
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>1</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>1</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>2</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>3</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>5</span>
 <span class=n>generator</span><span class=p>:</span>  <span class=mi>8</span>
-<span class=err>生成器返回值：</span> <span class=n>done</span>
+<span class=n>生成器返回值</span><span class=err>：</span> <span class=n>done</span>
 </code></pre></td></tr></table></div></div><p><strong>还可以通过yield实现在单线程的情况下实现并发运算的效果</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -422,50 +422,50 @@
 </span><span class=lnt>46
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>time</span>
 <span class=k>def</span> <span class=nf>consumer</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
-    <span class=k>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=si>%s</span><span class=s2> 准备学习啦!&#34;</span> <span class=o>%</span><span class=n>name</span><span class=p>)</span>
-    <span class=k>while</span> <span class=bp>True</span><span class=p>:</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=si>%s</span><span class=s2> 准备学习啦!&#34;</span> <span class=o>%</span><span class=n>name</span><span class=p>)</span>
+    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
        <span class=n>lesson</span> <span class=o>=</span> <span class=k>yield</span>
 
-       <span class=k>print</span><span class=p>(</span><span class=s2>&#34;开始[</span><span class=si>%s</span><span class=s2>]了,[</span><span class=si>%s</span><span class=s2>]老师来讲课了!&#34;</span> <span class=o>%</span><span class=p>(</span><span class=n>lesson</span><span class=p>,</span><span class=n>name</span><span class=p>))</span>
+       <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;开始[</span><span class=si>%s</span><span class=s2>]了,[</span><span class=si>%s</span><span class=s2>]老师来讲课了!&#34;</span> <span class=o>%</span><span class=p>(</span><span class=n>lesson</span><span class=p>,</span><span class=n>name</span><span class=p>))</span>
 
 <span class=k>def</span> <span class=nf>producer</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
     <span class=n>c</span> <span class=o>=</span> <span class=n>consumer</span><span class=p>(</span><span class=s1>&#39;A&#39;</span><span class=p>)</span>
     <span class=n>c2</span> <span class=o>=</span> <span class=n>consumer</span><span class=p>(</span><span class=s1>&#39;B&#39;</span><span class=p>)</span>
-    <span class=n>c</span><span class=o>.</span><span class=n>__next__</span><span class=p>()</span>
-    <span class=n>c2</span><span class=o>.</span><span class=n>__next__</span><span class=p>()</span>
-    <span class=k>print</span><span class=p>(</span><span class=s2>&#34;同学们开始上课 了!&#34;</span><span class=p>)</span>
+    <span class=n>c</span><span class=o>.</span><span class=fm>__next__</span><span class=p>()</span>
+    <span class=n>c2</span><span class=o>.</span><span class=fm>__next__</span><span class=p>()</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;同学们开始上课 了!&#34;</span><span class=p>)</span>
     <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>):</span>
         <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
-        <span class=k>print</span><span class=p>(</span><span class=s2>&#34;到了两个同学!&#34;</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;到了两个同学!&#34;</span><span class=p>)</span>
         <span class=n>c</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
         <span class=n>c2</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
 
-<span class=err>结果：</span>
-<span class=n>A</span> <span class=err>准备学习啦!</span>
-<span class=n>B</span> <span class=err>准备学习啦!</span>
-<span class=err>同学们开始上课</span> <span class=err>了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>6</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>开始</span><span class=p>[</span><span class=mi>6</span><span class=p>]</span><span class=err>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=err>老师来讲课了!</span>
-<span class=err>到了两个同学!</span>
+<span class=n>结果</span><span class=err>：</span>
+<span class=n>A</span> <span class=n>准备学习啦</span><span class=err>!</span>
+<span class=n>B</span> <span class=n>准备学习啦</span><span class=err>!</span>
+<span class=n>同学们开始上课</span> <span class=n>了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>6</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>A</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>开始</span><span class=p>[</span><span class=mi>6</span><span class=p>]</span><span class=n>了</span><span class=p>,[</span><span class=n>B</span><span class=p>]</span><span class=n>老师来讲课了</span><span class=err>!</span>
+<span class=n>到了两个同学</span><span class=err>!</span>
 </code></pre></td></tr></table></div></div><p>由上面的例子我么可以发现，python提供了两种基本的方式</p><p><strong>生成器函数：也是用def定义的，利用关键字yield一次性返回一个结果，阻塞，重新开始</strong></p><p><strong>生成器表达式：返回一个对象，这个对象只有在需要的时候才产生结果</strong></p><h4 id=生成器函数>——生成器函数</h4><p>为什么叫生成器函数？因为它随着时间的推移生成了一个数值队列。一般的函数在执行完毕之后会返回一个值然后退出，但是生成器函数会自动挂起，然后重新拾起急需执行，他会利用yield关键字关起函数，给调用者返回一个值，同时保留了当前的足够多的状态，可以使函数继续执行，生成器和迭代协议是密切相关的， **迭代器都有一个__next__()__成员方法，** 这个方法要么返回迭代的下一项，要买引起异常结束迭代。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -498,24 +498,24 @@
 <span class=s1>&#39;&#39;&#39;生成器&#39;&#39;&#39;</span>
 
 <span class=k>def</span> <span class=nf>create_counter</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
-    <span class=k>print</span><span class=p>(</span><span class=s2>&#34;create_counter&#34;</span><span class=p>)</span>
-    <span class=k>while</span> <span class=bp>True</span><span class=p>:</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;create_counter&#34;</span><span class=p>)</span>
+    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
         <span class=k>yield</span> <span class=n>n</span>
-        <span class=k>print</span><span class=p>(</span><span class=s2>&#34;increment n&#34;</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;increment n&#34;</span><span class=p>)</span>
         <span class=n>n</span> <span class=o>+=</span><span class=mi>1</span>
 
 <span class=n>gen</span> <span class=o>=</span> <span class=n>create_counter</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=n>gen</span><span class=p>)</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>gen</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>gen</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>gen</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>gen</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>gen</span><span class=p>))</span>
 
-<span class=err>结果：</span>
+<span class=n>结果</span><span class=err>：</span>
 <span class=o>&lt;</span><span class=n>generator</span> <span class=nb>object</span> <span class=n>create_counter</span> <span class=n>at</span> <span class=mh>0x0000023A1694A938</span><span class=o>&gt;</span>
 <span class=n>create_counter</span>
 <span class=mi>2</span>
 <span class=n>increment</span> <span class=n>n</span>
 <span class=mi>3</span>
-<span class=n>Process</span> <span class=n>finished</span> <span class=k>with</span> <span class=nb>exit</span> <span class=n>code</span> <span class=mi>0</span>
+<span class=n>Process</span> <span class=n>finished</span> <span class=k>with</span> <span class=n>exit</span> <span class=n>code</span> <span class=mi>0</span>
 </code></pre></td></tr></table></div></div><h4 id=生成器表达式>——生成器表达式</h4><p>生成器表达式来源于迭代和列表解析的组合，生成器和列表解析类似，但是它使用尖括号而不是方括号</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -645,11 +645,11 @@ print(isinstance(iter(s),Iterator))
 <span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>Iterator</span>
 <span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>Iterable</span>
 
-<span class=k>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>f</span><span class=p>,</span><span class=n>Iterator</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>f</span><span class=p>,</span><span class=n>Iterable</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>f</span><span class=p>,</span><span class=n>Iterator</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>f</span><span class=p>,</span><span class=n>Iterable</span><span class=p>))</span>
 
-<span class=bp>True</span>
-<span class=bp>True</span>
+<span class=kc>True</span>
+<span class=kc>True</span>
 </code></pre></td></tr></table></div></div><p>　　 <strong>结论：文件是可迭代对象，也是迭代器</strong></p><p><strong>小结：</strong></p><ul><li>凡是可作用于 <code>for</code> 循环的对象都是 <code>Iterable</code> 类型；</li><li>凡是可作用于 <code>next()</code> 函数的对象都是 <code>Iterator</code> 类型，它们表示一个惰性计算的序列；</li><li>集合数据类型如 <code>list</code>、<code>dict</code>、<code>str</code> 等是 <code>Iterable</code> 但不是 <code>Iterator</code> ，不过可以通过 <code>iter()</code> 函数获得一个 <code>Iterator</code> 对象。</li></ul><p>Python3的 <code>for</code> 循环本质上就是通过不断调用 <code>next()</code> 函数实现的，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>]:</span>
@@ -667,7 +667,7 @@ print(isinstance(iter(s),Iterator))
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=c1># 首先获得Iterator对象:</span>
 <span class=n>it</span> <span class=o>=</span> <span class=nb>iter</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>])</span>
 <span class=c1># 循环:</span>
-<span class=k>while</span> <span class=bp>True</span><span class=p>:</span>
+<span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
     <span class=k>try</span><span class=p>:</span>
         <span class=c1># 获得下一个值:</span>
         <span class=n>x</span> <span class=o>=</span> <span class=nb>next</span><span class=p>(</span><span class=n>it</span><span class=p>)</span>
@@ -680,7 +680,7 @@ print(isinstance(iter(s),Iterator))
 </span><span class=lnt>4
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>itertools</span> <span class=kn>import</span> <span class=n>accumulate</span>
 <span class=n>x</span> <span class=o>=</span> <span class=n>accumulate</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>x</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>x</span><span class=p>))</span>
 <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>10</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>21</span><span class=p>,</span> <span class=mi>28</span><span class=p>,</span> <span class=mi>36</span><span class=p>,</span> <span class=mi>45</span><span class=p>]</span>
 </code></pre></td></tr></table></div></div><h4 id=2itertoolspermutations>2，itertools.permutations</h4><p>产生指定数目元素的所有排列（顺序有关）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -690,8 +690,8 @@ print(isinstance(iter(s),Iterator))
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>itertools</span> <span class=kn>import</span> <span class=n>permutations</span>
 
 <span class=n>x</span> <span class=o>=</span> <span class=n>permutations</span><span class=p>((</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
-<span class=k>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>x</span><span class=p>))</span>
+<span class=nb>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>x</span><span class=p>))</span>
 <span class=p>[(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span> <span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span> <span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span> <span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>),</span> <span class=p>(</span><span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span> <span class=p>(</span><span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>)]</span>
 </code></pre></td></tr></table></div></div><p><a href=https://www.cnblogs.com/wj-1314/p/8490822.html target=_blank rel="noopener noreffer">python 生成器和迭代器有这篇就够了 - 战争热诚 - 博客园</a></p><div class="details admonition note open"><div class="details-summary admonition-title"><i class="icon fas fa-pencil-alt fa-fwnote"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i></div><div class=details-content><div class=admonition-content>本文最后更新于 <span class=timeago datetime=2020-06-25T11:06:17 title="June 25, 2020">June 25, 2020</span>，文中内容可能已过时，请谨慎使用。</div></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2020-06-25</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/GeneratorAndYield/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用 data-via=Linerzore data-hashtags=笔记,Generator,Yield><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=http://KiLien.github.io/GeneratorAndYield/ data-hashtag=笔记><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=http://KiLien.github.io/GeneratorAndYield/ data-title=生成器的运用><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%AC%94%E8%AE%B0/>笔记</a>,&nbsp;<a href=/tags/Generator/>Generator</a>,&nbsp;<a href=/tags/Yield/>Yield</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/singleton/ class=prev rel=prev title=单例模式实现><i class="fas fa-angle-left fa-fw"></i>单例模式实现</a>
-<a href=/PythonTrick/ class=next rel=next title=Python技巧>Python技巧<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.82.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Kilien</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+<a href=/PythonTrick/ class=next rel=next title=Python技巧>Python技巧<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.84.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Kilien</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div><div class=sidebar_wo id=right-wind-chimes><img class=wind-chimes-img src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes1.png alt=左风铃 onmouseover="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes2.png'" onmouseout="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes1.png'" title=回到顶部></div><div class=sidebar_wo id="left-wind-chimes "><img class=wind-chimes-img src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes3.png alt=右风铃 onmouseover="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes4.png'" onmouseout="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes3.png'" title=回到底部></div></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:20},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"Comment",lightTheme:"github-light",repo:"KiLien/KiLien.github.io"}},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},lightGallery:{actualSize:!1,exThumbImage:"data-thumbnail",hideBarsDelay:2e3,selector:".lightgallery",speed:400,thumbContHeight:80,thumbWidth:80,thumbnail:!0},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js></script><script type=text/javascript src=/js/custom.js></script><script>var avatar_plug,avatar_click;$(function(){$(".site-avatar-plug-bilibili").attr("src","https://cdn.jsdelivr.net/gh/KiLien/Pics@master/avatar-plug/bilibili_"+(~~(57*Math.random())+1)+".png")}),avatar_plug=0,avatar_click=1,jQuery(document).ready(function(a){var b=1,c=57;a("div.home-avatar a").click(function(d){avatar_click%b===0&&(avatar_plug++,a(".site-avatar-plug-bilibili").attr("src","https://cdn.jsdelivr.net/gh/KiLien/Pics@master/avatar-plug/bilibili_"+avatar_plug+".png")),avatar_plug===c&&(avatar_plug=0),a("div.home-avatar a").attr("alt","再点击"+(b-avatar_click%b)+"次头像试试看~~"),avatar_click++})})</script></body></html>
