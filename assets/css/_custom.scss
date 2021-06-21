@@ -39,6 +39,58 @@ nav#TableOfContents ol {
   }
 }
 
+/* 子菜单栏 */
+.dropdown {
+  display: inline-block;
+}
+
+/* 子菜单的内容 (默认隐藏) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  line-height: 1.3rem;
+}
+
+/* 子菜单的链接 */
+.dropdown-content a {
+  padding: 10px 18px 10px 14px;
+  text-decoration: none;
+  display: block;
+  & i {
+    margin-right: 3px;
+  }
+}
+
+/* 鼠标移上去后修改子菜单链接颜色 */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+/* 在鼠标移上去后显示子菜单 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 680px) {
+    .dropdown {
+      display: inline;
+    }
+  .dropdown:hover .dropdown-content {
+    display: inline;
+    z-index: 1;
+    margin-top: -2em;
+    margin-left: 3em;
+  }
+  .dropdown-content a:hover {
+    background-color: transparent;
+  }
+}
+
+
 /* 风铃🎐回到顶部或底部按钮 */
 .sidebar_wo {
     position:fixed;
