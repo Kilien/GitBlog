@@ -1,0 +1,3891 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python技巧2 - Kilien's Blog</title><meta name=keywords content="[Blog Algorithm Geek]"><meta name=Description content="Kilien's Blog"><meta property="og:title" content="Python技巧2"><meta property="og:description" content="35个高级Python知识点总结 No.1 一切皆对象 众所周知，Java中强调“一切皆对象”，但是Python中的面向对象比Java更加彻底，因为Py"><meta property="og:type" content="article"><meta property="og:url" content="http://KiLien.github.io/PythonTrick2/"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-11-09T11:06:17+08:00"><meta property="article:modified_time" content="2020-11-09T11:06:17+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png"><meta name=twitter:title content="Python技巧2"><meta name=twitter:description content="35个高级Python知识点总结 No.1 一切皆对象 众所周知，Java中强调“一切皆对象”，但是Python中的面向对象比Java更加彻底，因为Py"><meta name=application-name content="Kilien"><meta name=apple-mobile-web-app-title content="Kilien"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://KiLien.github.io/PythonTrick2/><link rel=prev href=http://KiLien.github.io/LeetCode-821-%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%9D%E7%A6%BB/><link rel=next href=http://KiLien.github.io/LeetCode-160%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python技巧2","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/KiLien.github.io\/PythonTrick2\/"},"genre":"posts","keywords":"Python, Trick","wordcount":16103,"url":"http:\/\/KiLien.github.io\/PythonTrick2\/","datePublished":"2020-11-09T11:06:17+08:00","dateModified":"2020-11-09T11:06:17+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Kilien"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('theme','dark')</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=top-scroll-bar></div><div class=header-title><a href=/ title="Kilien's Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png data-srcset="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png, https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png 1.5x, https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png 2x" data-sizes=auto alt=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png title=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png>Kilien</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/><i class="fas fa-folder-open"></i> 文章 </a><a class=menu-item href=/tags/><i class="fas fa-tags"></i> 标签 </a><a class=menu-item href=/categories/><i class="fas fa-th"></i> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Kilien's Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png data-srcset="https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png, https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png 1.5x, https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png 2x" data-sizes=auto alt=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png title=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/logo.png>Kilien</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title><i class="fas fa-folder-open"></i>文章</a><a class=menu-item href=/tags/ title><i class="fas fa-tags"></i>标签</a><a class=menu-item href=/categories/ title><i class="fas fa-th"></i>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Python技巧2</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=" author" class=author><i class="fas fa-user-circle fa-fw"></i>Kilien</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/Python/><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-11-09>2020-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 16103 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 33 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><ul><li><a href=#no1-一切皆对象>No.1 一切皆对象</a><ul><li><a href=#step1>Step.1</a></li><li><a href=#step2>Step.2</a></li><li><a href=#step3>Step.3</a></li><li><a href=#step4>Step.4</a></li></ul></li><li><a href=#no2-关键字typeobjectclass之间的关系>No.2 关键字type、object、class之间的关系</a></li><li><a href=#no3-python的内置类型>No.3 Python的内置类型</a><ul><li><a href=#step1-none类型>Step.1 None类型</a></li><li><a href=#step2-数值类型>Step.2 数值类型</a></li><li><a href=#step3-迭代类型>Step.3 迭代类型</a></li><li><a href=#step4-序列类型>Step.4 序列类型</a></li><li><a href=#step5-映射类型>Step.5 映射类型</a></li><li><a href=#step6-集合类型>Step.6 集合类型</a></li><li><a href=#step7-上下文管理类型>Step.7 上下文管理类型</a></li><li><a href=#step8-其他类型>Step.8 其他类型</a></li></ul></li><li><a href=#no4-魔法函数>NO.4 魔法函数</a></li><li><a href=#no5-鸭子类型与白鹅类型>No.5 鸭子类型与白鹅类型</a></li><li><a href=#no6-协议-抽象基类abc模块和序列之间的继承关系>No.6 协议、 抽象基类、abc模块和序列之间的继承关系</a></li><li><a href=#no7-isinstence和type的区别>No.7 isinstence和type的区别</a></li><li><a href=#no8-类变量和实例变量>No.8 类变量和实例变量</a></li><li><a href=#no9-类和实例属性以及方法的查找顺序>No.9 类和实例属性以及方法的查找顺序</a></li><li><a href=#no10-类方法实例方法和静态方法>No.10 类方法、实例方法和静态方法</a></li><li><a href=#no11-数据封装和私有属性>No.11 数据封装和私有属性</a></li><li><a href=#no12-python的自省机制>No.12 Python的自省机制</a></li><li><a href=#no13-super函数>No.13 super函数</a></li><li><a href=#no14-mixin继承>No.14 Mixin继承</a></li><li><a href=#no25-上下文管理器with语句与contextlib简化>No.25 上下文管理器with语句与contextlib简化</a></li><li><a href=#no26-序列类型的分类>No.26 序列类型的分类</a></li><li><a href=#no27-extend之间的区别于应用场景>No.27 +、+=、extend()之间的区别于应用场景</a></li><li><a href=#no28-使用bisect维护一个已排序的序列>No.28 使用bisect维护一个已排序的序列</a></li><li><a href=#no29-deque类详解>No.29 deque类详解</a></li><li><a href=#no30-列表推导式生成器表达式字典推导式>No.30 列表推导式、生成器表达式、字典推导式</a></li><li><a href=#no31-set与dict的实现原理>No.31 Set与Dict的实现原理</a></li><li><a href=#no32-python中的集合类模块collections>No.32 Python中的集合类模块collections</a><ul><li><a href=#defaultdict>defaultdict</a></li><li><a href=#ordereddict>OrderedDict</a></li><li><a href=#deque>deque</a></li><li><a href=#counter>Counter</a></li><li><a href=#namedtuple>namedtuple</a></li><li><a href=#chainmap>ChainMap</a></li><li><a href=#userdict>UserDict</a></li></ul></li><li><a href=#no33-python中的变量与垃圾回收机制>No.33 Python中的变量与垃圾回收机制</a></li><li><a href=#no34-python元类编程>No.34 Python元类编程</a><ul><li><a href=#property动态属性>property动态属性</a></li><li><a href=#__getattr__和__getattribute__函数的使用>__getattr__和__getattribute__函数的使用</a></li><li><a href=#属性描述符>属性描述符</a></li><li><a href=#属性访问的优先规则>属性访问的优先规则</a></li><li><a href=#__new__-和-__init__-的区别><code>__new__()</code> 和 <code>__init__()</code> 的区别</a></li><li><a href=#自定义元类>自定义元类</a></li><li><a href=#使用元类创建api>使用元类创建API</a></li></ul></li><li><a href=#no35-迭代器和生成器>No.35 迭代器和生成器</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=35个高级python知识点总结>35个高级Python知识点总结</h1><h3 id=no1-一切皆对象>No.1 一切皆对象</h3><p>众所周知，Java中强调“一切皆对象”，但是Python中的面向对象比Java更加彻底，因为Python中的类(class)也是对象，函数（function）也是对象，而且Python的代码和模块也都是对象。</p><ul><li>Python中函数和类可以赋值给一个变量</li><li>Python中函数和类可以存放到集合对象中</li><li>Python中函数和类可以作为一个函数的参数传递给函数</li><li>Python中函数和类可以作为返回值</li></ul><h4 id=step1>Step.1</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 首先创建一个函数和一个Python3.x的新式类
+class Demo(object):
+    def __init__(self):
+        print(&#34;Demo Class&#34;)
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 定义一个函数
+def function():
+    print(&#34;function&#34;)
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 在Python无论是函数，还是类，都是对象，他们可以赋值给一个变量
+class_value = Demo
+func_value = function
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 并且可以通过变量调用
+class_value()   # Demo Class
+func_value()    # function
+</code></pre></td></tr></table></div></div><h4 id=step2>Step.2</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 将函数和类添加到集合中
+obj_list = []
+obj_list.append(Demo)
+obj_list.append(function)
+# 遍历列表
+for i in obj_list:
+    print(i)
+    # &lt;class &#39;__main__.Demo&#39;&gt;
+    # &lt;function function at 0x0000020D681B3E18&gt;
+</code></pre></td></tr></table></div></div><h4 id=step3>Step.3</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 定义一个具体函数
+def test_func(class_name, func_name):
+    class_name()
+    func_name()
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 将类名和函数名传入形参列表
+test_func(Demo, function)
+# Demo Class
+# function
+</code></pre></td></tr></table></div></div><h4 id=step4>Step.4</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 定义函数实现返回类和函数
+def test_func2():
+    return Demo
+
+def test_func3():
+    return function
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 执行函数
+test_func2()() # Demo Class
+test_func3()() # function
+</code></pre></td></tr></table></div></div><h3 id=no2-关键字typeobjectclass之间的关系>No.2 关键字type、object、class之间的关系</h3><p>在Python中， <code>object</code> 的实例是 <code>type</code> ， <code>object</code> 是顶层类，没有基类； <code>type</code> 的实例是 <code>type</code> ， <code>type</code> 的基类是 <code>object</code> 。Python中的内置类型的基类是 <code>object</code> ，但是他们都是由 <code>type</code> 实例化而来，具体的值由内置类型实例化而来。在Python2.x的语法中用户自定义的类没有明确指定基类就默认是没有基类，在Python3.x的语法中，指定基类为 <code>object</code> 。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># object是谁实例化的？
+print(type(object))      # &lt;class &#39;type&#39;&gt;
+
+# object继承自哪个类？
+print(object.__bases__)  # ()
+
+# type是谁实例化的？
+print(type(type))        # &lt;class &#39;type&#39;&gt;
+
+# type继承自哪个类？
+print(type.__bases__)    # (&lt;class &#39;object&#39;&gt;,)
+
+# 定义一个变量
+value = 100
+
+# 100由谁实例化？
+print(type(value))       # &lt;class &#39;int&#39;&gt;
+
+# int由谁实例化？
+print(type(int))         # &lt;class &#39;type&#39;&gt;
+
+# int继承自哪个类？
+print(int.__bases__)     # (&lt;class &#39;object&#39;&gt;,)
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># Python 2.x的旧式类
+class OldClass():
+    pass
+
+# Python 3.x的新式类
+class NewClass(object):
+    pass
+</code></pre></td></tr></table></div></div><h3 id=no3-python的内置类型>No.3 Python的内置类型</h3><p>在Python中，对象有3个特征属性：</p><ul><li>在内存中的地址，使用 <code>id()</code> 函数进行查看</li><li>对象的类型</li><li>对象的默认值</li></ul><h4 id=step1-none类型>Step.1 None类型</h4><p>在Python解释器启动时，会创建一个None类型的None对象，并且None对象全局只有一个。</p><h4 id=step2-数值类型>Step.2 数值类型</h4><ul><li>ini类型</li><li>float类型</li><li>complex类型</li><li>bool类型</li></ul><h4 id=step3-迭代类型>Step.3 迭代类型</h4><p>在Python中，迭代类型可以使用循环来进行遍历。</p><h4 id=step4-序列类型>Step.4 序列类型</h4><ul><li>list</li><li>tuple</li><li>str</li><li>array</li><li>range</li><li>bytes, bytearray, memoryvie（二进制序列）</li></ul><h4 id=step5-映射类型>Step.5 映射类型</h4><ul><li>dict</li></ul><h4 id=step6-集合类型>Step.6 集合类型</h4><ul><li>set</li><li>frozenset</li></ul><h4 id=step7-上下文管理类型>Step.7 上下文管理类型</h4><ul><li>with语句</li></ul><h4 id=step8-其他类型>Step.8 其他类型</h4><ul><li>模块</li><li>class</li><li>实例</li><li>函数</li><li>方法</li><li>代码</li><li>object对象</li><li>type对象</li><li>ellipsis（省略号）</li><li>notimplemented</li></ul><h3 id=no4-魔法函数>NO.4 魔法函数</h3><p>Python中的魔法函数使用双下划线开始，以双下划线结尾。关于详细介绍请看我的文章——《全面总结Python中的魔法函数》。</p><h3 id=no5-鸭子类型与白鹅类型>No.5 鸭子类型与白鹅类型</h3><p>鸭子类型是程序设计中的推断风格，在鸭子类型中关注对象如何使用而不是类型本身。鸭子类型像多态一样工作但是没有继承。鸭子类型的概念来自于：“当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。”</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 定义狗类
+class Dog(object):
+    def eat(self):
+        print(&#34;dog is eatting...&#34;)
+
+# 定义猫类
+class Cat(object):
+    def eat(self):
+        print(&#34;cat is eatting...&#34;)
+
+# 定义鸭子类
+class Duck(object):
+    def eat(self):
+        print(&#34;duck is eatting...&#34;)
+
+# 以上Python中多态的体现
+
+# 定义动物列表
+an_li = []
+# 将动物添加到列表
+an_li.append(Dog)
+an_li.append(Cat)
+an_li.append(Duck)
+
+# 依次调用每个动物的eat()方法
+for i in an_li:
+    i().eat()
+
+# dog is eatting...
+# cat is eatting...
+# duck is eatting...
+</code></pre></td></tr></table></div></div><p>白鹅类型是指只要 <code>cls</code> 是抽象基类，即 <code>cls</code> 的元类是 <code>abc.ABCMeta</code> ，就可以使用 <code>isinstance(obj, cls)</code> 。</p><h3 id=no6-协议-抽象基类abc模块和序列之间的继承关系>No.6 协议、 抽象基类、abc模块和序列之间的继承关系</h3><ul><li>协议：Python中的非正式接口，是允许Python实现多态的方式，协议是非正式的，不具备强制性，由约定和文档定义。</li><li>接口：泛指实体把自己提供给外界的一种抽象化物（可以为另一实体），用以由内部操作分离出外部沟通方法，使其能被内部修改而不影响外界其他实体与其交互的方式。</li></ul><p>我们可以使用 <code>猴子补丁</code> 来实现协议，那么什么是猴子补丁呢？</p><p>猴子补丁就是在运行时修改模块或类，不去修改源代码，从而实现目标协议接口操作，这就是所谓的打猴子补丁。</p><blockquote><p>Tips：猴子补丁的叫法起源于Zope框架，开发人员在修改Zope的Bug时，经常在程序后面追加更新的部分，这些 <code>杂牌军补丁</code> 的英文名字叫做 <code>guerilla patch</code> ，后来写成 <code>gorllia</code> ，接着就变成了 <code>monkey</code> 。</p></blockquote><p>猴子补丁的主要作用是：</p><ul><li>在运行时替换方法、属性</li><li>在不修改源代码的情况下对程序本身添加之前没有的功能</li><li>在运行时对象中添加补丁，而不是在磁盘中的源代码上</li></ul><p>应用案例：假设写了一个很大的项目，处处使用了json模块来解析json文件，但是后来发现ujson比json性能更高，修改源代码是要修改很多处的，所以只需要在程序入口加入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import json
+# pip install ujson
+import ujson  
+
+def monkey_patch_json():  
+    json.__name__ = &#39;ujson&#39;  
+    json.dumps = ujson.dumps  
+    json.loads = ujson.loads  
+
+monkey_patch_json()
+</code></pre></td></tr></table></div></div><p>Python 的抽象基类有一个重要实用优势：可以使用 <code>register</code> 类方法在终端用户的代码中把某个类 “声明” 为一个抽象基类的 “虚拟” 子 类（为此，被注册的类必腨满足抽象其类对方法名称和签名的要求，最重要的是要满足底 层语义契约；但是，开发那个类时不用了解抽象基类，更不用继承抽象基类 。有时，为了让抽象类识别子类，甚至不用注册。要抑制住创建抽象基类的冲动。滥用抽象基类会造成灾难性后果，表明语言太注重表面形式 。</p><ul><li>抽象基类不能被实例化(不能创建对象)，通常是作为基类供子类继承，子类中重写虚函数，实现具体的接口。</li><li>判定某个对象的类型</li><li>强制子类必须实现某些方法</li></ul><blockquote><p>抽象基类的定义与使用</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import abc
+
+# 定义缓存类
+class Cache(metaclass=abc.ABCMeta):
+
+    @abc.abstractmethod
+    def get(self, key):
+        pass
+
+    @abc.abstractmethod
+    def set(self, key, value):
+        pass
+
+# 定义redis缓存类实现Cache类中的get()和set()方法
+class RedisCache(Cache):
+
+    def set(self, key):
+        pass
+
+    def get(self, key, value):
+        pass
+</code></pre></td></tr></table></div></div><p>值得注意的是：Python 3.0-Python3.3之间，继承抽象基类的语法是 <code>class ClassName(metaclass=adc.ABCMeta)</code> ，其他版本是： <code>class ClassName(abc.ABC)</code> 。</p><ul><li>collections.abc模块中各个抽象基类的UML类图</li></ul><p><img class=lazyload src=/svg/loading.min.svg data-src=4a0a4599254fef2e9645ae51684699c7.png data-srcset="4a0a4599254fef2e9645ae51684699c7.png, 4a0a4599254fef2e9645ae51684699c7.png 1.5x, 4a0a4599254fef2e9645ae51684699c7.png 2x" data-sizes=auto alt=4a0a4599254fef2e9645ae51684699c7.png title=4a0a4599254fef2e9645ae51684699c7.png></p><h3 id=no7-isinstence和type的区别>No.7 isinstence和type的区别</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class A(object):
+    pass
+
+class B(A):
+    pass
+
+b = B()
+
+print(isinstance(b, B))
+print(isinstance(b, A))
+print(type(b) is B)
+print(type(b) is A)
+
+# True
+# True
+# True
+# False
+</code></pre></td></tr></table></div></div><h3 id=no8-类变量和实例变量>No.8 类变量和实例变量</h3><ul><li>实例变量只能通过类的实例进行调用</li><li>修改模板对象创建的对象的属性，模板对象的属性不会改变</li><li>修改模板对象的属性，由模板对象创建的对象的属性会改变</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 此处的类也是模板对象，Python中一切皆对象
+class A(object):
+
+    #类变量
+    number = 12
+
+    def __init__(self):
+        # 实例变量
+        self.number_2 = 13
+
+# 实例变量只能通过类的实例进行调用
+print(A.number)      # 12
+print(A().number)    # 12
+print(A().number_2)  # 13
+
+# 修改模板对象创建的对象的属性，模板对象的属性不会改变
+a = A()
+a.number = 18
+print(a.number)      # 18
+print(A().number)    # 12
+print(A.number)      # 12
+
+# 修改模板对象的属性，由模板对象创建的对象的属性会改变
+A.number = 19
+print(A.number)      # 19
+print(A().number)    # 19
+</code></pre></td></tr></table></div></div><h3 id=no9-类和实例属性以及方法的查找顺序>No.9 类和实例属性以及方法的查找顺序</h3><ul><li>在Python 2.2之前只有经典类，到Python2.7还会兼容经典类，Python3.x以后只使用新式类，Python之前版本也会兼容新式类</li><li>Python 2.2 及其之前类没有基类，Python新式类需要显式继承自 <code>object</code> ，即使不显式继承也会默认继承自 <code>object</code></li><li>经典类在类多重继承的时候是采用从左到右深度优先原则匹配方法的.而新式类是采用C3算法</li><li>经典类没有 <strong>MRO</strong> 和instance.mro()调用的</li></ul><p>假定存在以下继承关系：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class D(object):
+    def say_hello(self):
+        pass
+
+class E(object):
+    pass
+
+class B(D):
+    pass
+
+class C(E):
+    pass
+
+class A(B, C):
+    pass
+</code></pre></td></tr></table></div></div><p>采用DFS（深度优先搜索算法）当调用了A的say_hello()方法的时候，系统会去B中查找如果B中也没有找到，那么去D中查找，很显然D中存在这个方法，但是DFS对于以下继承关系就会有缺陷：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class D(object):
+    pass
+
+class B(D):
+    pass
+
+class C(D):
+    def say_hello(self):
+        pass
+
+class A(B, C):
+    pass
+</code></pre></td></tr></table></div></div><p>在A的实例对象中调用say_hello方法时，系统会先去B中查找，由于B类中没有该方法的定义，所以会去D中查找，D类中也没有，系统就会认为该方法没有定义，其实该方法在C中定义了。所以考虑使用BFS（广度优先搜索算法），那么问题回到第一个继承关系，假定C和D具备重名方法，在调用A的实例的方法时，应该先在B中查找，理应调用D中的方法，但是使用BFS的时候，C类中的方法会覆盖D类中的方法。在Python 2.3以后的版本中，使用C3算法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 获取解析顺序的方法
+类名.mro()
+类名.__mro__
+inspect.getmro(类名)
+</code></pre></td></tr></table></div></div><p>使用C3算法后的第二种继承顺序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class D(object):
+    pass
+
+class B(D):
+    pass
+
+class C(D):
+    def say_hello(self):
+        pass
+
+class A(B, C):
+    pass
+
+print(A.mro()) # [&lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;object&#39;&gt;]
+</code></pre></td></tr></table></div></div><p>使用C3算法后的第一种继承顺序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class D(object):
+    pass
+
+class E(object):
+    pass
+
+class B(D):
+    pass
+
+class C(E):
+    pass
+
+class A(B, C):
+    pass
+
+print(A.mro()) 
+# [&lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.E&#39;&gt;, &lt;class &#39;object&#39;&gt;]
+</code></pre></td></tr></table></div></div><p>在这里仅介绍了算法的作用和演变历史，关于深入详细解析，请看我的其他文章——《从Python继承谈起，到C3算法落笔》。</p><h3 id=no10-类方法实例方法和静态方法>No.10 类方法、实例方法和静态方法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Demo(object):
+    # 类方法
+    @classmethod
+    def class_method(cls, number):
+        pass
+
+    # 静态方法
+    @staticmethod
+    def static_method(number):
+        pass
+
+    # 对象方法/实例方法
+    def object_method(self, number):
+        pass
+</code></pre></td></tr></table></div></div><p>实例方法只能通过类的实例来调用；静态方法是一个独立的、无状态的函数，紧紧依托于所在类的命名空间上；类方法在为了获取类中维护的数据，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Home(object):
+
+    # 房间中人数
+    __number = 0
+
+    @classmethod
+    def add_person_number(cls):
+        cls.__number += 1
+
+    @classmethod
+    def get_person_number(cls):
+        return cls.__number
+
+    def __new__(self):
+        Home.add_person_number()
+        # 重写__new__方法，调用object的__new__
+        return super().__new__(self)
+
+class Person(Home):
+
+    def __init__(self):
+
+        # 房间人员姓名
+        self.name = &#39;name&#39;
+
+    # 创建人员对象时调用Home的__new__()方法
+
+tom = Person()
+print(type(tom))   # &lt;class &#39;__main__.Person&#39;&gt;
+alice = Person()
+bob = Person()
+test = Person()
+
+print(Home.get_person_number())
+</code></pre></td></tr></table></div></div><h3 id=no11-数据封装和私有属性>No.11 数据封装和私有属性</h3><p>Python中使用双下划线+属性名称实现类似于静态语言中的private修饰来实现数据封装。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class User(object):
+
+    def __init__(self, number):
+        self.__number = number
+        self.__number_2 = 0
+
+    def set_number(self, number):
+        self.__number = number
+
+    def get_number(self):
+        return self.__number
+
+    def set_number_2(self, number2):
+        self.__number_2 = number2
+        # self.__number2 = number2
+
+    def get_number_2(self):
+        return self.__number_2
+        # return self.__number2
+
+u = User(25)
+print(u.get_number())  # 25
+# 真的类似于Java的反射机制吗？
+print(u._User__number) # 25
+# 下面又是啥情况。。。想不明白了T_T
+u.set_number_2(18)
+print(u.get_number_2()) # 18
+print(u._User__number_2) 
+# Anaconda 3.6.3    第一次是：u._User__number_2   第二次是：18
+# Anaconda 3.6.5    结果都是 0 
+
+# 代码我改成了正确答案，感谢我大哥给我指正错误，我保留了错误痕迹
+# 变量名称写错了，算是个写博客突发事故，这问题我找了一天，万分感谢我大哥，我太傻B了，犯了低级错误
+# 留给和我一样的童鞋参考我的错我之处吧！
+
+# 正确结果：
+# 25  25  18  18
+</code></pre></td></tr></table></div></div><h3 id=no12-python的自省机制>No.12 Python的自省机制</h3><p>自省（introspection）是一种自我检查行为。在计算机编程中，自省是指这种能力：检查某些事物以确定它是什么、它知道什么以及它能做什么。自省向程序员提供了极大的灵活性和控制力。</p><ul><li>dir([obj])：返回传递给它的任何对象的属性名称经过排序的列表（会有一些特殊的属性不包含在内）</li><li>getattr(obj, attr)：返回任意对象的任何属性 ，调用这个方法将返回obj中名为attr值的属性的值</li><li>&mldr; &mldr;</li></ul><h3 id=no13-super函数>No.13 super函数</h3><p>Python3.x 和 Python2.x 的一个区别是: Python 3 可以使用直接使用 super().xxx 代替 super(type[, object-or-type]).xxx 。</p><p>super()函数用来调用MRO（类方法解析顺序表）的下一个类的方法。</p><h3 id=no14-mixin继承>No.14 Mixin继承</h3><p>在设计上将Mixin类作为功能混入继承自Mixin的类。使用Mixin类实现多重继承应该注意：</p><ul><li>Mixin类必须表示某种功能</li><li>职责单一，如果要有多个功能，就要设计多个Mixin类</li><li>不依赖子类实现，Mixin类的存在仅仅是增加了子类的功能特性</li><li>即使子类没有继承这个Mixin类也可以工作</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Cat(object):
+
+    def eat(self):
+        print(&#34;I can eat.&#34;)
+
+    def drink(self):
+        print(&#34;I can drink.&#34;)
+
+class CatFlyMixin(object):
+
+    def fly(self):
+        print(&#34;I can fly.&#34;)
+
+class CatJumpMixin(object):
+
+    def jump(self):
+        print(&#34;I can jump.&#34;)
+
+class TomCat(Cat, CatFlyMixin):
+    pass
+
+class PersianCat(Cat, CatFlyMixin, CatJumpMixin):
+    pass
+
+if __name__ == &#39;__main__&#39;:
+
+    # 汤姆猫没有跳跃功能
+    tom = TomCat()
+    tom.fly()
+    tom.eat()
+    tom.drink()
+
+    # 波斯猫混入了跳跃功能
+    persian = PersianCat()
+    persian.drink()
+    persian.eat()
+    persian.fly()
+    persian.jump()
+</code></pre></td></tr></table></div></div><h3 id=no25-上下文管理器with语句与contextlib简化>No.25 上下文管理器with语句与contextlib简化</h3><p>普通的异常捕获机制：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>try:
+    pass
+except Exception as err:
+    pass
+else:
+    pass
+finally:
+    pass
+</code></pre></td></tr></table></div></div><p>with简化了异常捕获写法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Demo(object):
+
+    def __enter__(self):
+        print(&#34;enter...&#34;)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print(&#34;exit...&#34;)
+
+    def echo_hello(self):
+        print(&#34;Hello, Hello...&#34;)
+
+with Demo() as d:
+    d.echo_hello()
+
+# enter...
+# Hello, Hello...
+# exit...
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import contextlib
+
+# 使用装饰器
+@contextlib.contextmanager
+def file_open(file_name):
+    # 此处写__enter___函数中定义的代码
+    print(&#34;enter function code...&#34;)
+    yield {}
+    # 此处写__exit__函数中定义的代码
+    print(&#34;exit function code...&#34;)
+
+with file_open(&#34;json.json&#34;) as f:
+    pass
+
+# enter function code...
+# exit function code...
+</code></pre></td></tr></table></div></div><h3 id=no26-序列类型的分类>No.26 序列类型的分类</h3><ul><li>容器序列：list tuple deque</li><li>扁平序列：str bytes bytearray array.array</li><li>可变序列：list deque bytearray array</li><li>不可变序列：str tuple bytes</li></ul><h3 id=no27-extend之间的区别于应用场景>No.27 +、+=、extend()之间的区别于应用场景</h3><p>首先看测试用例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 创建一个序列类型的对象
+my_list = [1, 2, 3]
+# 将现有的序列合并到my_list
+extend_my_list = my_list + [4, 5]
+
+print(extend_my_list)  # [1, 2, 3, 4, 5]
+# 将一个元组合并到这个序列
+extend_my_list = my_list + (6, 7)
+# 抛出异常 TypeError: can only concatenate list (not &#34;tuple&#34;) to list
+print(extend_my_list)
+
+# 使用另一种方式合并
+extend_my_list += (6, 7)
+print(extend_my_list)  # [1, 2, 3, 4, 5, 6, 7]
+
+# 使用extend()函数进行合并
+
+extend_my_list.extend((7, 8))
+print(extend_my_list)  # [1, 2, 3, 4, 5, 6, 7, 7, 8]
+</code></pre></td></tr></table></div></div><p>由源代码片段可知：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class MutableSequence(Sequence):
+
+    __slots__ = ()
+
+    &#34;&#34;&#34;All the operations on a read-write sequence.
+
+    Concrete subclasses must provide __new__ or __init__,
+    __getitem__, __setitem__, __delitem__, __len__, and insert().
+
+    &#34;&#34;&#34;
+    # extend()方法内部使用for循环来append()元素，它接收一个可迭代序列
+    def extend(self, values):
+        &#39;S.extend(iterable) -- extend sequence by appending elements from the iterable&#39;
+        for v in values:
+            self.append(v)
+    # 调用 += 运算的时候就是调用该函数，这个函数内部调用extend()方法
+    def __iadd__(self, values):
+        self.extend(values)
+        return self
+</code></pre></td></tr></table></div></div><h3 id=no28-使用bisect维护一个已排序的序列>No.28 使用bisect维护一个已排序的序列</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import bisect
+
+my_list = []
+bisect.insort(my_list, 2)
+bisect.insort(my_list, 9)
+bisect.insort(my_list, 5)
+bisect.insort(my_list, 5)
+bisect.insort(my_list, 1)
+# insort()函数返回接收的元素应该插入到指定序列的索引位置
+print(my_list)  # [1, 2, 5, 5, 9]
+</code></pre></td></tr></table></div></div><h3 id=no29-deque类详解>No.29 deque类详解</h3><p>deque是Python中一个双端队列，能在队列两端以$O(1)$的效率插入数据，位于collections模块中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import deque
+# 定义一个双端队列，长度为3
+d = deque(maxlen=3)
+</code></pre></td></tr></table></div></div><p>deque类的源码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class deque(object):
+    &#34;&#34;&#34;
+    deque([iterable[, maxlen]]) --&gt; deque object
+    一个类似列表的序列，用于对其端点附近的数据访问进行优化。
+    &#34;&#34;&#34;
+    def append(self, *args, **kwargs):
+        &#34;&#34;&#34; 在队列右端添加数据 &#34;&#34;&#34;
+        pass
+
+    def appendleft(self, *args, **kwargs): 
+        &#34;&#34;&#34; 在队列左端添加数据 &#34;&#34;&#34;
+        pass
+
+    def clear(self, *args, **kwargs):
+        &#34;&#34;&#34; 清空所有元素 &#34;&#34;&#34;
+        pass
+
+    def copy(self, *args, **kwargs):
+        &#34;&#34;&#34; 浅拷贝一个双端队列 &#34;&#34;&#34;
+        pass
+
+    def count(self, value):
+        &#34;&#34;&#34; 统计指定value值的出现次数 &#34;&#34;&#34;
+        return 0
+
+    def extend(self, *args, **kwargs):
+        &#34;&#34;&#34; 使用迭代的方式扩展deque的右端 &#34;&#34;&#34;
+        pass
+
+    def extendleft(self, *args, **kwargs):
+        &#34;&#34;&#34; 使用迭代的方式扩展deque的左端 &#34;&#34;&#34;
+        pass
+
+    def index(self, value, start=None, stop=None): __doc__
+        &#34;&#34;&#34;
+        返回第一个符合条件的索引的值
+        &#34;&#34;&#34;
+        return 0
+
+    def insert(self, index, p_object):
+        &#34;&#34;&#34; 在指定索引之前插入 &#34;&#34;&#34;
+        pass
+
+    def pop(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34;  删除并返回右端的一个元素 &#34;&#34;&#34;
+        pass
+
+    def popleft(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; 删除并返回左端的一个元素 &#34;&#34;&#34;
+        pass
+
+    def remove(self, value): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; 删除第一个与value相同的值 &#34;&#34;&#34;
+        pass
+
+    def reverse(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; 翻转队列 &#34;&#34;&#34;
+        pass
+
+    def rotate(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; 向右旋转deque N步， 如果N是个负数，那么向左旋转N的绝对值步 &#34;&#34;&#34;
+        pass
+
+    def __add__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self+value. &#34;&#34;&#34;
+        pass
+
+    def __bool__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; self != 0 &#34;&#34;&#34;
+        pass
+
+    def __contains__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return key in self. &#34;&#34;&#34;
+        pass
+
+    def __copy__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return a shallow copy of a deque. &#34;&#34;&#34;
+        pass
+
+    def __delitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Delete self[key]. &#34;&#34;&#34;
+        pass
+
+    def __eq__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self==value. &#34;&#34;&#34;
+        pass
+
+    def __getattribute__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return getattr(self, name). &#34;&#34;&#34;
+        pass
+
+    def __getitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self[key]. &#34;&#34;&#34;
+        pass
+
+    def __ge__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&gt;=value. &#34;&#34;&#34;
+        pass
+
+    def __gt__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&gt;value. &#34;&#34;&#34;
+        pass
+
+    def __iadd__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement self+=value. &#34;&#34;&#34;
+        pass
+
+    def __imul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement self*=value. &#34;&#34;&#34;
+        pass
+
+    def __init__(self, iterable=(), maxlen=None): # known case of _collections.deque.__init__
+        &#34;&#34;&#34;
+        deque([iterable[, maxlen]]) --&gt; deque object
+
+        A list-like sequence optimized for data accesses near its endpoints.
+        # (copied from class doc)
+        &#34;&#34;&#34;
+        pass
+
+    def __iter__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement iter(self). &#34;&#34;&#34;
+        pass
+
+    def __len__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return len(self). &#34;&#34;&#34;
+        pass
+
+    def __le__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&lt;=value. &#34;&#34;&#34;
+        pass
+
+    def __lt__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&lt;value. &#34;&#34;&#34;
+        pass
+
+    def __mul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self*value.n &#34;&#34;&#34;
+        pass
+
+    @staticmethod # known case of __new__
+    def __new__(*args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Create and return a new object.  See help(type) for accurate signature. &#34;&#34;&#34;
+        pass
+
+    def __ne__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self!=value. &#34;&#34;&#34;
+        pass
+
+    def __reduce__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return state information for pickling. &#34;&#34;&#34;
+        pass
+
+    def __repr__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return repr(self). &#34;&#34;&#34;
+        pass
+
+    def __reversed__(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.__reversed__() -- return a reverse iterator over the deque &#34;&#34;&#34;
+        pass
+
+    def __rmul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self*value. &#34;&#34;&#34;
+        pass
+
+    def __setitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Set self[key] to value. &#34;&#34;&#34;
+        pass
+
+    def __sizeof__(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.__sizeof__() -- size of D in memory, in bytes &#34;&#34;&#34;
+        pass
+
+    maxlen = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    &#34;&#34;&#34;maximum size of a deque or None if unbounded&#34;&#34;&#34;
+
+    __hash__ = None
+</code></pre></td></tr></table></div></div><h3 id=no30-列表推导式生成器表达式字典推导式>No.30 列表推导式、生成器表达式、字典推导式</h3><ul><li>列表推导式</li></ul><p>列表生成式要比操作列表效率高很多，但是列表生成式的滥用会导致代码可读性降低，并且列表生成式可以替换 <code>map()</code> 和 <code>reduce()</code> 函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 构建列表
+my_list = [x for x in range(9)]
+print(my_list)   # [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+# 构建0-8中为偶数的列表
+my_list = [x for x in range(9) if(x%2==0)]
+print(my_list)   # [0, 2, 4, 6, 8]
+
+# 构建0-8为奇数的列表，并将每个数字做平方运算
+
+def function(number):
+    return number * number
+
+my_list = [function(x) for x in range(9) if x%2!=0]
+print(my_list)   # [1, 9, 25, 49]
+</code></pre></td></tr></table></div></div><ul><li>生成器表达式</li></ul><p>生成器表达式就是把列表表达式的中括号变成小括号。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 构造一个生成器
+gen = (i for i in range(9))
+
+# 生成器可以被遍历
+for i in gen:
+    print(i)
+</code></pre></td></tr></table></div></div><p>生成器可以使用 <code>list()</code> 函数转换为列表：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback># 将生成器转换为列表
+li = list(gen)
+print(li)
+</code></pre></td></tr></table></div></div><ul><li>字典推导式</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>d = {
+    &#39;tom&#39;: 18,
+    &#39;alice&#39;: 16,
+    &#39;bob&#39;: 20,
+}
+dict = {key: value for key, value in d.items()}
+print(dict)  # {&#39;tom&#39;: 18, &#39;alice&#39;: 16, &#39;bob&#39;: 20}
+</code></pre></td></tr></table></div></div><ul><li>Set集合推导式</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>my_set = {i for i in range(9)}
+print(my_set)   # {0, 1, 2, 3, 4, 5, 6, 7, 8}
+</code></pre></td></tr></table></div></div><h3 id=no31-set与dict的实现原理>No.31 Set与Dict的实现原理</h3><p>Set和Dict的背后实现都是Hash(哈希)表，有的书本上也较散列表。Hash表原理可以参考我的 <code>算法与数学</code> 博客栏目，下面给出几点总结：</p><ul><li>Set和Dict的效率高于List。</li><li>Se和Dict的Key必须是可哈希的元素。</li><li>在Python中，不可变对象都是可哈希的，比如：str、fronzenset、tuple，需要实现 <code>__hash__()</code> 函数。</li><li>Dict内存空间占用多，但是速度快，Python中自定义对象或Python内部对象都是Dict包装的。</li><li>Dict和Set的元素存储顺序和元素的添加顺序有关，但是添加元素时有可能改变已有的元素顺序。</li><li>List会随着元素数量的增加，查找元素的时间也会增大。</li><li>Dict和Set不会随着元素数量的增加而查找时间延长。</li></ul><h3 id=no32-python中的集合类模块collections>No.32 Python中的集合类模块collections</h3><h4 id=defaultdict>defaultdict</h4><p><code>defaultdict</code> 在 <code>dict</code> 的基础上添加了 <code>default_factroy</code> 方法，它的作用是当key不存在的时候自动生成相应类型的value， <code>defalutdict</code> 参数可以指定成 <code>list</code>、<code>set</code>、<code>int</code> 等各种类型。</p><blockquote><p>应用场景：</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import defaultdict
+
+my_list = [
+    (&#34;Tom&#34;, 18),
+    (&#34;Tom&#34;, 20),
+    (&#34;Alice&#34;, 15),
+    (&#34;Bob&#34;, 21),
+]
+
+def_dict = defaultdict(list)
+
+for key, val in my_list:
+    def_dict[key].append(val)
+
+print(def_dict.items())
+# dict_items([(&#39;Tom&#39;, [18, 20]), (&#39;Alice&#39;, [15]), (&#39;Bob&#39;, [21])])
+
+# 如果不考虑重复元素可以使用如下方式
+def_dict_2 = defaultdict(set)
+
+for key, val in my_list:
+    def_dict_2[key].add(val)
+
+print(def_dict_2.items())
+# dict_items([(&#39;Tom&#39;, {18, 20}), (&#39;Alice&#39;, {15}), (&#39;Bob&#39;, {21})])
+</code></pre></td></tr></table></div></div><blockquote><p>源码：</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class defaultdict(Dict[_KT, _VT], Generic[_KT, _VT]):
+    default_factory = ...  # type: Callable[[], _VT]
+
+    @overload
+    def __init__(self, **kwargs: _VT) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]]) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]], **kwargs: _VT) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]],
+                 map: Mapping[_KT, _VT]) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]],
+                 map: Mapping[_KT, _VT], **kwargs: _VT) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]],
+                 iterable: Iterable[Tuple[_KT, _VT]]) -&gt; None: ...
+    @overload
+    def __init__(self, default_factory: Optional[Callable[[], _VT]],
+                 iterable: Iterable[Tuple[_KT, _VT]], **kwargs: _VT) -&gt; None: ...
+    def __missing__(self, key: _KT) -&gt; _VT: ...
+    # TODO __reversed__
+    def copy(self: _DefaultDictT) -&gt; _DefaultDictT: ...
+</code></pre></td></tr></table></div></div><h4 id=ordereddict>OrderedDict</h4><p>OrderDict最大的特点就是元素位置有序，它是 <code>dict</code> 的子类。OrderDict在内部维护一个字典元素的有序列表。</p><blockquote><p>应用场景：</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import OrderedDict
+
+my_dict = {
+    &#34;Bob&#34;: 20,
+    &#34;Tim&#34;: 20,
+    &#34;Amy&#34;: 18,
+}
+# 通过key来排序
+order_dict = OrderedDict(sorted(my_dict.items(), key=lambda li: li[1]))
+print(order_dict) # OrderedDict([(&#39;Amy&#39;, 18), (&#39;Bob&#39;, 20), (&#39;Tim&#39;, 20)])
+</code></pre></td></tr></table></div></div><blockquote><p>源码：</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class OrderedDict(dict):
+    &#39;Dictionary that remembers insertion order&#39;
+    # An inherited dict maps keys to values.
+    # The inherited dict provides __getitem__, __len__, __contains__, and get.
+    # The remaining methods are order-aware.
+    # Big-O running times for all methods are the same as regular dictionaries.
+
+    # The internal self.__map dict maps keys to links in a doubly linked list.
+    # The circular doubly linked list starts and ends with a sentinel element.
+    # The sentinel element never gets deleted (this simplifies the algorithm).
+    # The sentinel is in self.__hardroot with a weakref proxy in self.__root.
+    # The prev links are weakref proxies (to prevent circular references).
+    # Individual links are kept alive by the hard reference in self.__map.
+    # Those hard references disappear when a key is deleted from an OrderedDict.
+
+    def __init__(*args, **kwds):
+        &#39;&#39;&#39;Initialize an ordered dictionary.  The signature is the same as
+        regular dictionaries.  Keyword argument order is preserved.
+        &#39;&#39;&#39;
+        if not args:
+            raise TypeError(&#34;descriptor &#39;__init__&#39; of &#39;OrderedDict&#39; object &#34;
+                            &#34;needs an argument&#34;)
+        self, *args = args
+        if len(args) &gt; 1:
+            raise TypeError(&#39;expected at most 1 arguments, got %d&#39; % len(args))
+        try:
+            self.__root
+        except AttributeError:
+            self.__hardroot = _Link()
+            self.__root = root = _proxy(self.__hardroot)
+            root.prev = root.next = root
+            self.__map = {}
+        self.__update(*args, **kwds)
+
+    def __setitem__(self, key, value,
+                    dict_setitem=dict.__setitem__, proxy=_proxy, Link=_Link):
+        &#39;od.__setitem__(i, y) &lt;==&gt; od[i]=y&#39;
+        # Setting a new item creates a new link at the end of the linked list,
+        # and the inherited dictionary is updated with the new key/value pair.
+        if key not in self:
+            self.__map[key] = link = Link()
+            root = self.__root
+            last = root.prev
+            link.prev, link.next, link.key = last, root, key
+            last.next = link
+            root.prev = proxy(link)
+        dict_setitem(self, key, value)
+
+    def __delitem__(self, key, dict_delitem=dict.__delitem__):
+        &#39;od.__delitem__(y) &lt;==&gt; del od[y]&#39;
+        # Deleting an existing item uses self.__map to find the link which gets
+        # removed by updating the links in the predecessor and successor nodes.
+        dict_delitem(self, key)
+        link = self.__map.pop(key)
+        link_prev = link.prev
+        link_next = link.next
+        link_prev.next = link_next
+        link_next.prev = link_prev
+        link.prev = None
+        link.next = None
+
+    def __iter__(self):
+        &#39;od.__iter__() &lt;==&gt; iter(od)&#39;
+        # Traverse the linked list in order.
+        root = self.__root
+        curr = root.next
+        while curr is not root:
+            yield curr.key
+            curr = curr.next
+
+    def __reversed__(self):
+        &#39;od.__reversed__() &lt;==&gt; reversed(od)&#39;
+        # Traverse the linked list in reverse order.
+        root = self.__root
+        curr = root.prev
+        while curr is not root:
+            yield curr.key
+            curr = curr.prev
+
+    def clear(self):
+        &#39;od.clear() -&gt; None.  Remove all items from od.&#39;
+        root = self.__root
+        root.prev = root.next = root
+        self.__map.clear()
+        dict.clear(self)
+
+    def popitem(self, last=True):
+        &#39;&#39;&#39;Remove and return a (key, value) pair from the dictionary.
+
+        Pairs are returned in LIFO order if last is true or FIFO order if false.
+        &#39;&#39;&#39;
+        if not self:
+            raise KeyError(&#39;dictionary is empty&#39;)
+        root = self.__root
+        if last:
+            link = root.prev
+            link_prev = link.prev
+            link_prev.next = root
+            root.prev = link_prev
+        else:
+            link = root.next
+            link_next = link.next
+            root.next = link_next
+            link_next.prev = root
+        key = link.key
+        del self.__map[key]
+        value = dict.pop(self, key)
+        return key, value
+
+    def move_to_end(self, key, last=True):
+        &#39;&#39;&#39;Move an existing element to the end (or beginning if last==False).
+
+        Raises KeyError if the element does not exist.
+        When last=True, acts like a fast version of self[key]=self.pop(key).
+
+        &#39;&#39;&#39;
+        link = self.__map[key]
+        link_prev = link.prev
+        link_next = link.next
+        soft_link = link_next.prev
+        link_prev.next = link_next
+        link_next.prev = link_prev
+        root = self.__root
+        if last:
+            last = root.prev
+            link.prev = last
+            link.next = root
+            root.prev = soft_link
+            last.next = link
+        else:
+            first = root.next
+            link.prev = root
+            link.next = first
+            first.prev = soft_link
+            root.next = link
+
+    def __sizeof__(self):
+        sizeof = _sys.getsizeof
+        n = len(self) + 1                       # number of links including root
+        size = sizeof(self.__dict__)            # instance dictionary
+        size += sizeof(self.__map) * 2          # internal dict and inherited dict
+        size += sizeof(self.__hardroot) * n     # link objects
+        size += sizeof(self.__root) * n         # proxy objects
+        return size
+
+    update = __update = MutableMapping.update
+
+    def keys(self):
+        &#34;D.keys() -&gt; a set-like object providing a view on D&#39;s keys&#34;
+        return _OrderedDictKeysView(self)
+
+    def items(self):
+        &#34;D.items() -&gt; a set-like object providing a view on D&#39;s items&#34;
+        return _OrderedDictItemsView(self)
+
+    def values(self):
+        &#34;D.values() -&gt; an object providing a view on D&#39;s values&#34;
+        return _OrderedDictValuesView(self)
+
+    __ne__ = MutableMapping.__ne__
+
+    __marker = object()
+
+    def pop(self, key, default=__marker):
+        &#39;&#39;&#39;od.pop(k[,d]) -&gt; v, remove specified key and return the corresponding
+        value.  If key is not found, d is returned if given, otherwise KeyError
+        is raised.
+
+        &#39;&#39;&#39;
+        if key in self:
+            result = self[key]
+            del self[key]
+            return result
+        if default is self.__marker:
+            raise KeyError(key)
+        return default
+
+    def setdefault(self, key, default=None):
+        &#39;od.setdefault(k[,d]) -&gt; od.get(k,d), also set od[k]=d if k not in od&#39;
+        if key in self:
+            return self[key]
+        self[key] = default
+        return default
+
+    @_recursive_repr()
+    def __repr__(self):
+        &#39;od.__repr__() &lt;==&gt; repr(od)&#39;
+        if not self:
+            return &#39;%s()&#39; % (self.__class__.__name__,)
+        return &#39;%s(%r)&#39; % (self.__class__.__name__, list(self.items()))
+
+    def __reduce__(self):
+        &#39;Return state information for pickling&#39;
+        inst_dict = vars(self).copy()
+        for k in vars(OrderedDict()):
+            inst_dict.pop(k, None)
+        return self.__class__, (), inst_dict or None, None, iter(self.items())
+
+    def copy(self):
+        &#39;od.copy() -&gt; a shallow copy of od&#39;
+        return self.__class__(self)
+
+    @classmethod
+    def fromkeys(cls, iterable, value=None):
+        &#39;&#39;&#39;OD.fromkeys(S[, v]) -&gt; New ordered dictionary with keys from S.
+        If not specified, the value defaults to None.
+
+        &#39;&#39;&#39;
+        self = cls()
+        for key in iterable:
+            self[key] = value
+        return self
+
+    def __eq__(self, other):
+        &#39;&#39;&#39;od.__eq__(y) &lt;==&gt; od==y.  Comparison to another OD is order-sensitive
+        while comparison to a regular mapping is order-insensitive.
+
+        &#39;&#39;&#39;
+        if isinstance(other, OrderedDict):
+            return dict.__eq__(self, other) and all(map(_eq, self, other))
+        return dict.__eq__(self, other)
+</code></pre></td></tr></table></div></div><h4 id=deque>deque</h4><p><code>list</code> 存储数据的时候，内部实现是数组，数组的查找速度是很快的，但是插入和删除数据的速度堪忧。deque双端列表内部实现是双端队列。 <code>deuque</code> 适用队列和栈，并且是线程安全的。</p><p><code>deque</code> 提供 <code>append()</code> 和 <code>pop()</code> 函数实现在 <code>deque</code> 尾部添加和弹出数据，提供 <code>appendleft()</code> 和 <code>popleft()</code> 函数实现在 <code>deque</code> 头部添加和弹出元素。这4个函数的时间复杂度都是$O(1)$的，但是 <code>list</code> 的时间复杂度高达$O(n)$。</p><blockquote><p>创建deque队列</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import deque
+
+# 创建一个队列长度为20的deque
+dQ = deque(range(10), maxlen=20)
+print(dQ)
+# deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=20)
+</code></pre></td></tr></table></div></div><blockquote><p>源码</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class deque(object):
+    &#34;&#34;&#34;
+    deque([iterable[, maxlen]]) --&gt; deque object
+
+    A list-like sequence optimized for data accesses near its endpoints.
+    &#34;&#34;&#34;
+    def append(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Add an element to the right side of the deque. &#34;&#34;&#34;
+        pass
+
+    def appendleft(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Add an element to the left side of the deque. &#34;&#34;&#34;
+        pass
+
+    def clear(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Remove all elements from the deque. &#34;&#34;&#34;
+        pass
+
+    def copy(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return a shallow copy of a deque. &#34;&#34;&#34;
+        pass
+
+    def count(self, value): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.count(value) -&gt; integer -- return number of occurrences of value &#34;&#34;&#34;
+        return 0
+
+    def extend(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Extend the right side of the deque with elements from the iterable &#34;&#34;&#34;
+        pass
+
+    def extendleft(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Extend the left side of the deque with elements from the iterable &#34;&#34;&#34;
+        pass
+
+    def index(self, value, start=None, stop=None): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34;
+        D.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+        Raises ValueError if the value is not present.
+        &#34;&#34;&#34;
+        return 0
+
+    def insert(self, index, p_object): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.insert(index, object) -- insert object before index &#34;&#34;&#34;
+        pass
+
+    def pop(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Remove and return the rightmost element. &#34;&#34;&#34;
+        pass
+
+    def popleft(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Remove and return the leftmost element. &#34;&#34;&#34;
+        pass
+
+    def remove(self, value): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.remove(value) -- remove first occurrence of value. &#34;&#34;&#34;
+        pass
+
+    def reverse(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.reverse() -- reverse *IN PLACE* &#34;&#34;&#34;
+        pass
+
+    def rotate(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Rotate the deque n steps to the right (default n=1).  If n is negative, rotates left. &#34;&#34;&#34;
+        pass
+
+    def __add__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self+value. &#34;&#34;&#34;
+        pass
+
+    def __bool__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; self != 0 &#34;&#34;&#34;
+        pass
+
+    def __contains__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return key in self. &#34;&#34;&#34;
+        pass
+
+    def __copy__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return a shallow copy of a deque. &#34;&#34;&#34;
+        pass
+
+    def __delitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Delete self[key]. &#34;&#34;&#34;
+        pass
+
+    def __eq__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self==value. &#34;&#34;&#34;
+        pass
+
+    def __getattribute__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return getattr(self, name). &#34;&#34;&#34;
+        pass
+
+    def __getitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self[key]. &#34;&#34;&#34;
+        pass
+
+    def __ge__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&gt;=value. &#34;&#34;&#34;
+        pass
+
+    def __gt__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&gt;value. &#34;&#34;&#34;
+        pass
+
+    def __iadd__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement self+=value. &#34;&#34;&#34;
+        pass
+
+    def __imul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement self*=value. &#34;&#34;&#34;
+        pass
+
+    def __init__(self, iterable=(), maxlen=None): # known case of _collections.deque.__init__
+        &#34;&#34;&#34;
+        deque([iterable[, maxlen]]) --&gt; deque object
+
+        A list-like sequence optimized for data accesses near its endpoints.
+        # (copied from class doc)
+        &#34;&#34;&#34;
+        pass
+
+    def __iter__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Implement iter(self). &#34;&#34;&#34;
+        pass
+
+    def __len__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return len(self). &#34;&#34;&#34;
+        pass
+
+    def __le__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&lt;=value. &#34;&#34;&#34;
+        pass
+
+    def __lt__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self&lt;value. &#34;&#34;&#34;
+        pass
+
+    def __mul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self*value.n &#34;&#34;&#34;
+        pass
+
+    @staticmethod # known case of __new__
+    def __new__(*args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Create and return a new object.  See help(type) for accurate signature. &#34;&#34;&#34;
+        pass
+
+    def __ne__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self!=value. &#34;&#34;&#34;
+        pass
+
+    def __reduce__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return state information for pickling. &#34;&#34;&#34;
+        pass
+
+    def __repr__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return repr(self). &#34;&#34;&#34;
+        pass
+
+    def __reversed__(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.__reversed__() -- return a reverse iterator over the deque &#34;&#34;&#34;
+        pass
+
+    def __rmul__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Return self*value. &#34;&#34;&#34;
+        pass
+
+    def __setitem__(self, *args, **kwargs): # real signature unknown
+        &#34;&#34;&#34; Set self[key] to value. &#34;&#34;&#34;
+        pass
+
+    def __sizeof__(self): # real signature unknown; restored from __doc__
+        &#34;&#34;&#34; D.__sizeof__() -- size of D in memory, in bytes &#34;&#34;&#34;
+        pass
+
+    maxlen = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    &#34;&#34;&#34;maximum size of a deque or None if unbounded&#34;&#34;&#34;
+
+    __hash__ = None
+</code></pre></td></tr></table></div></div><h4 id=counter>Counter</h4><p>用来统计元素出现的次数。</p><blockquote><p>应用场景</p></blockquote><p><img class=lazyload src=/svg/loading.min.svg data-src=8b0d266f2f8faa0d6564424f54b7373a.png data-srcset="8b0d266f2f8faa0d6564424f54b7373a.png, 8b0d266f2f8faa0d6564424f54b7373a.png 1.5x, 8b0d266f2f8faa0d6564424f54b7373a.png 2x" data-sizes=auto alt=8b0d266f2f8faa0d6564424f54b7373a.png title=8b0d266f2f8faa0d6564424f54b7373a.png></p><blockquote><p>源码</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span><span class=lnt>355
+</span><span class=lnt>356
+</span><span class=lnt>357
+</span><span class=lnt>358
+</span><span class=lnt>359
+</span><span class=lnt>360
+</span><span class=lnt>361
+</span><span class=lnt>362
+</span><span class=lnt>363
+</span><span class=lnt>364
+</span><span class=lnt>365
+</span><span class=lnt>366
+</span><span class=lnt>367
+</span><span class=lnt>368
+</span><span class=lnt>369
+</span><span class=lnt>370
+</span><span class=lnt>371
+</span><span class=lnt>372
+</span><span class=lnt>373
+</span><span class=lnt>374
+</span><span class=lnt>375
+</span><span class=lnt>376
+</span><span class=lnt>377
+</span><span class=lnt>378
+</span><span class=lnt>379
+</span><span class=lnt>380
+</span><span class=lnt>381
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Counter(dict):
+    &#39;&#39;&#39;Dict subclass for counting hashable items.  Sometimes called a bag
+    or multiset.  Elements are stored as dictionary keys and their counts
+    are stored as dictionary values.
+
+    &gt;&gt;&gt; c = Counter(&#39;abcdeabcdabcaba&#39;)  # count elements from a string
+
+    &gt;&gt;&gt; c.most_common(3)                # three most common elements
+    [(&#39;a&#39;, 5), (&#39;b&#39;, 4), (&#39;c&#39;, 3)]
+    &gt;&gt;&gt; sorted(c)                       # list all unique elements
+    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+    &gt;&gt;&gt; &#39;&#39;.join(sorted(c.elements()))   # list elements with repetitions
+    &#39;aaaaabbbbcccdde&#39;
+    &gt;&gt;&gt; sum(c.values())                 # total of all counts
+    15
+
+    &gt;&gt;&gt; c[&#39;a&#39;]                          # count of letter &#39;a&#39;
+    5
+    &gt;&gt;&gt; for elem in &#39;shazam&#39;:           # update counts from an iterable
+    ...     c[elem] += 1                # by adding 1 to each element&#39;s count
+    &gt;&gt;&gt; c[&#39;a&#39;]                          # now there are seven &#39;a&#39;
+    7
+    &gt;&gt;&gt; del c[&#39;b&#39;]                      # remove all &#39;b&#39;
+    &gt;&gt;&gt; c[&#39;b&#39;]                          # now there are zero &#39;b&#39;
+    0
+
+    &gt;&gt;&gt; d = Counter(&#39;simsalabim&#39;)       # make another counter
+    &gt;&gt;&gt; c.update(d)                     # add in the second counter
+    &gt;&gt;&gt; c[&#39;a&#39;]                          # now there are nine &#39;a&#39;
+    9
+
+    &gt;&gt;&gt; c.clear()                       # empty the counter
+    &gt;&gt;&gt; c
+    Counter()
+
+    Note:  If a count is set to zero or reduced to zero, it will remain
+    in the counter until the entry is deleted or the counter is cleared:
+
+    &gt;&gt;&gt; c = Counter(&#39;aaabbc&#39;)
+    &gt;&gt;&gt; c[&#39;b&#39;] -= 2                     # reduce the count of &#39;b&#39; by two
+    &gt;&gt;&gt; c.most_common()                 # &#39;b&#39; is still in, but its count is zero
+    [(&#39;a&#39;, 3), (&#39;c&#39;, 1), (&#39;b&#39;, 0)]
+
+    &#39;&#39;&#39;
+    # References:
+    #   http://en.wikipedia.org/wiki/Multiset
+    #   http://www.gnu.org/software/smalltalk/manual-base/html_node/Bag.html
+    #   http://www.demo2s.com/Tutorial/Cpp/0380__set-multiset/Catalog0380__set-multiset.htm
+    #   http://code.activestate.com/recipes/259174/
+    #   Knuth, TAOCP Vol. II section 4.6.3
+
+    def __init__(*args, **kwds):
+        &#39;&#39;&#39;Create a new, empty Counter object.  And if given, count elements
+        from an input iterable.  Or, initialize the count from another mapping
+        of elements to their counts.
+
+        &gt;&gt;&gt; c = Counter()                           # a new, empty counter
+        &gt;&gt;&gt; c = Counter(&#39;gallahad&#39;)                 # a new counter from an iterable
+        &gt;&gt;&gt; c = Counter({&#39;a&#39;: 4, &#39;b&#39;: 2})           # a new counter from a mapping
+        &gt;&gt;&gt; c = Counter(a=4, b=2)                   # a new counter from keyword args
+
+        &#39;&#39;&#39;
+        if not args:
+            raise TypeError(&#34;descriptor &#39;__init__&#39; of &#39;Counter&#39; object &#34;
+                            &#34;needs an argument&#34;)
+        self, *args = args
+        if len(args) &gt; 1:
+            raise TypeError(&#39;expected at most 1 arguments, got %d&#39; % len(args))
+        super(Counter, self).__init__()
+        self.update(*args, **kwds)
+
+    def __missing__(self, key):
+        &#39;The count of elements not in the Counter is zero.&#39;
+        # Needed so that self[missing_item] does not raise KeyError
+        return 0
+
+    def most_common(self, n=None):
+        &#39;&#39;&#39;List the n most common elements and their counts from the most
+        common to the least.  If n is None, then list all element counts.
+
+        &gt;&gt;&gt; Counter(&#39;abcdeabcdabcaba&#39;).most_common(3)
+        [(&#39;a&#39;, 5), (&#39;b&#39;, 4), (&#39;c&#39;, 3)]
+
+        &#39;&#39;&#39;
+        # Emulate Bag.sortedByCount from Smalltalk
+        if n is None:
+            return sorted(self.items(), key=_itemgetter(1), reverse=True)
+        return _heapq.nlargest(n, self.items(), key=_itemgetter(1))
+
+    def elements(self):
+        &#39;&#39;&#39;Iterator over elements repeating each as many times as its count.
+
+        &gt;&gt;&gt; c = Counter(&#39;ABCABC&#39;)
+        &gt;&gt;&gt; sorted(c.elements())
+        [&#39;A&#39;, &#39;A&#39;, &#39;B&#39;, &#39;B&#39;, &#39;C&#39;, &#39;C&#39;]
+
+        # Knuth&#39;s example for prime factors of 1836:  2**2 * 3**3 * 17**1
+        &gt;&gt;&gt; prime_factors = Counter({2: 2, 3: 3, 17: 1})
+        &gt;&gt;&gt; product = 1
+        &gt;&gt;&gt; for factor in prime_factors.elements():     # loop over factors
+        ...     product *= factor                       # and multiply them
+        &gt;&gt;&gt; product
+        1836
+
+        Note, if an element&#39;s count has been set to zero or is a negative
+        number, elements() will ignore it.
+
+        &#39;&#39;&#39;
+        # Emulate Bag.do from Smalltalk and Multiset.begin from C++.
+        return _chain.from_iterable(_starmap(_repeat, self.items()))
+
+    # Override dict methods where necessary
+
+    @classmethod
+    def fromkeys(cls, iterable, v=None):
+        # There is no equivalent method for counters because setting v=1
+        # means that no element can have a count greater than one.
+        raise NotImplementedError(
+            &#39;Counter.fromkeys() is undefined.  Use Counter(iterable) instead.&#39;)
+
+    def update(*args, **kwds):
+        &#39;&#39;&#39;Like dict.update() but add counts instead of replacing them.
+
+        Source can be an iterable, a dictionary, or another Counter instance.
+
+        &gt;&gt;&gt; c = Counter(&#39;which&#39;)
+        &gt;&gt;&gt; c.update(&#39;witch&#39;)           # add elements from another iterable
+        &gt;&gt;&gt; d = Counter(&#39;watch&#39;)
+        &gt;&gt;&gt; c.update(d)                 # add elements from another counter
+        &gt;&gt;&gt; c[&#39;h&#39;]                      # four &#39;h&#39; in which, witch, and watch
+        4
+
+        &#39;&#39;&#39;
+        # The regular dict.update() operation makes no sense here because the
+        # replace behavior results in the some of original untouched counts
+        # being mixed-in with all of the other counts for a mismash that
+        # doesn&#39;t have a straight-forward interpretation in most counting
+        # contexts.  Instead, we implement straight-addition.  Both the inputs
+        # and outputs are allowed to contain zero and negative counts.
+
+        if not args:
+            raise TypeError(&#34;descriptor &#39;update&#39; of &#39;Counter&#39; object &#34;
+                            &#34;needs an argument&#34;)
+        self, *args = args
+        if len(args) &gt; 1:
+            raise TypeError(&#39;expected at most 1 arguments, got %d&#39; % len(args))
+        iterable = args[0] if args else None
+        if iterable is not None:
+            if isinstance(iterable, Mapping):
+                if self:
+                    self_get = self.get
+                    for elem, count in iterable.items():
+                        self[elem] = count + self_get(elem, 0)
+                else:
+                    super(Counter, self).update(iterable) # fast path when counter is empty
+            else:
+                _count_elements(self, iterable)
+        if kwds:
+            self.update(kwds)
+
+    def subtract(*args, **kwds):
+        &#39;&#39;&#39;Like dict.update() but subtracts counts instead of replacing them.
+        Counts can be reduced below zero.  Both the inputs and outputs are
+        allowed to contain zero and negative counts.
+
+        Source can be an iterable, a dictionary, or another Counter instance.
+
+        &gt;&gt;&gt; c = Counter(&#39;which&#39;)
+        &gt;&gt;&gt; c.subtract(&#39;witch&#39;)             # subtract elements from another iterable
+        &gt;&gt;&gt; c.subtract(Counter(&#39;watch&#39;))    # subtract elements from another counter
+        &gt;&gt;&gt; c[&#39;h&#39;]                          # 2 in which, minus 1 in witch, minus 1 in watch
+        0
+        &gt;&gt;&gt; c[&#39;w&#39;]                          # 1 in which, minus 1 in witch, minus 1 in watch
+        -1
+
+        &#39;&#39;&#39;
+        if not args:
+            raise TypeError(&#34;descriptor &#39;subtract&#39; of &#39;Counter&#39; object &#34;
+                            &#34;needs an argument&#34;)
+        self, *args = args
+        if len(args) &gt; 1:
+            raise TypeError(&#39;expected at most 1 arguments, got %d&#39; % len(args))
+        iterable = args[0] if args else None
+        if iterable is not None:
+            self_get = self.get
+            if isinstance(iterable, Mapping):
+                for elem, count in iterable.items():
+                    self[elem] = self_get(elem, 0) - count
+            else:
+                for elem in iterable:
+                    self[elem] = self_get(elem, 0) - 1
+        if kwds:
+            self.subtract(kwds)
+
+    def copy(self):
+        &#39;Return a shallow copy.&#39;
+        return self.__class__(self)
+
+    def __reduce__(self):
+        return self.__class__, (dict(self),)
+
+    def __delitem__(self, elem):
+        &#39;Like dict.__delitem__() but does not raise KeyError for missing values.&#39;
+        if elem in self:
+            super().__delitem__(elem)
+
+    def __repr__(self):
+        if not self:
+            return &#39;%s()&#39; % self.__class__.__name__
+        try:
+            items = &#39;, &#39;.join(map(&#39;%r: %r&#39;.__mod__, self.most_common()))
+            return &#39;%s({%s})&#39; % (self.__class__.__name__, items)
+        except TypeError:
+            # handle case where values are not orderable
+            return &#39;{0}({1!r})&#39;.format(self.__class__.__name__, dict(self))
+
+    # Multiset-style mathematical operations discussed in:
+    #       Knuth TAOCP Volume II section 4.6.3 exercise 19
+    #       and at http://en.wikipedia.org/wiki/Multiset
+    #
+    # Outputs guaranteed to only include positive counts.
+    #
+    # To strip negative and zero counts, add-in an empty counter:
+    #       c += Counter()
+
+    def __add__(self, other):
+        &#39;&#39;&#39;Add counts from two counters.
+
+        &gt;&gt;&gt; Counter(&#39;abbb&#39;) + Counter(&#39;bcc&#39;)
+        Counter({&#39;b&#39;: 4, &#39;c&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        if not isinstance(other, Counter):
+            return NotImplemented
+        result = Counter()
+        for elem, count in self.items():
+            newcount = count + other[elem]
+            if newcount &gt; 0:
+                result[elem] = newcount
+        for elem, count in other.items():
+            if elem not in self and count &gt; 0:
+                result[elem] = count
+        return result
+
+    def __sub__(self, other):
+        &#39;&#39;&#39; Subtract count, but keep only results with positive counts.
+
+        &gt;&gt;&gt; Counter(&#39;abbbc&#39;) - Counter(&#39;bccd&#39;)
+        Counter({&#39;b&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        if not isinstance(other, Counter):
+            return NotImplemented
+        result = Counter()
+        for elem, count in self.items():
+            newcount = count - other[elem]
+            if newcount &gt; 0:
+                result[elem] = newcount
+        for elem, count in other.items():
+            if elem not in self and count &lt; 0:
+                result[elem] = 0 - count
+        return result
+
+    def __or__(self, other):
+        &#39;&#39;&#39;Union is the maximum of value in either of the input counters.
+
+        &gt;&gt;&gt; Counter(&#39;abbb&#39;) | Counter(&#39;bcc&#39;)
+        Counter({&#39;b&#39;: 3, &#39;c&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        if not isinstance(other, Counter):
+            return NotImplemented
+        result = Counter()
+        for elem, count in self.items():
+            other_count = other[elem]
+            newcount = other_count if count &lt; other_count else count
+            if newcount &gt; 0:
+                result[elem] = newcount
+        for elem, count in other.items():
+            if elem not in self and count &gt; 0:
+                result[elem] = count
+        return result
+
+    def __and__(self, other):
+        &#39;&#39;&#39; Intersection is the minimum of corresponding counts.
+
+        &gt;&gt;&gt; Counter(&#39;abbb&#39;) &amp; Counter(&#39;bcc&#39;)
+        Counter({&#39;b&#39;: 1})
+
+        &#39;&#39;&#39;
+        if not isinstance(other, Counter):
+            return NotImplemented
+        result = Counter()
+        for elem, count in self.items():
+            other_count = other[elem]
+            newcount = count if count &lt; other_count else other_count
+            if newcount &gt; 0:
+                result[elem] = newcount
+        return result
+
+    def __pos__(self):
+        &#39;Adds an empty counter, effectively stripping negative and zero counts&#39;
+        result = Counter()
+        for elem, count in self.items():
+            if count &gt; 0:
+                result[elem] = count
+        return result
+
+    def __neg__(self):
+        &#39;&#39;&#39;Subtracts from an empty counter.  Strips positive and zero counts,
+        and flips the sign on negative counts.
+
+        &#39;&#39;&#39;
+        result = Counter()
+        for elem, count in self.items():
+            if count &lt; 0:
+                result[elem] = 0 - count
+        return result
+
+    def _keep_positive(self):
+        &#39;&#39;&#39;Internal method to strip elements with a negative or zero count&#39;&#39;&#39;
+        nonpositive = [elem for elem, count in self.items() if not count &gt; 0]
+        for elem in nonpositive:
+            del self[elem]
+        return self
+
+    def __iadd__(self, other):
+        &#39;&#39;&#39;Inplace add from another counter, keeping only positive counts.
+
+        &gt;&gt;&gt; c = Counter(&#39;abbb&#39;)
+        &gt;&gt;&gt; c += Counter(&#39;bcc&#39;)
+        &gt;&gt;&gt; c
+        Counter({&#39;b&#39;: 4, &#39;c&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        for elem, count in other.items():
+            self[elem] += count
+        return self._keep_positive()
+
+    def __isub__(self, other):
+        &#39;&#39;&#39;Inplace subtract counter, but keep only results with positive counts.
+
+        &gt;&gt;&gt; c = Counter(&#39;abbbc&#39;)
+        &gt;&gt;&gt; c -= Counter(&#39;bccd&#39;)
+        &gt;&gt;&gt; c
+        Counter({&#39;b&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        for elem, count in other.items():
+            self[elem] -= count
+        return self._keep_positive()
+
+    def __ior__(self, other):
+        &#39;&#39;&#39;Inplace union is the maximum of value from either counter.
+
+        &gt;&gt;&gt; c = Counter(&#39;abbb&#39;)
+        &gt;&gt;&gt; c |= Counter(&#39;bcc&#39;)
+        &gt;&gt;&gt; c
+        Counter({&#39;b&#39;: 3, &#39;c&#39;: 2, &#39;a&#39;: 1})
+
+        &#39;&#39;&#39;
+        for elem, other_count in other.items():
+            count = self[elem]
+            if other_count &gt; count:
+                self[elem] = other_count
+        return self._keep_positive()
+
+    def __iand__(self, other):
+        &#39;&#39;&#39;Inplace intersection is the minimum of corresponding counts.
+
+        &gt;&gt;&gt; c = Counter(&#39;abbb&#39;)
+        &gt;&gt;&gt; c &amp;= Counter(&#39;bcc&#39;)
+        &gt;&gt;&gt; c
+        Counter({&#39;b&#39;: 1})
+
+        &#39;&#39;&#39;
+        for elem, count in self.items():
+            other_count = other[elem]
+            if other_count &lt; count:
+                self[elem] = other_count
+        return self._keep_positive()
+</code></pre></td></tr></table></div></div><h4 id=namedtuple>namedtuple</h4><p>命名tuple中的元素来使程序更具可读性 。</p><blockquote><p>应用案例</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import namedtuple
+
+City = namedtuple(&#39;City&#39;, &#39;name title popu coor&#39;)
+tokyo = City(&#39;Tokyo&#39;, &#39;下辈子让我做系守的姑娘吧！下辈子让我做东京的帅哥吧！&#39;, 36.933, (35.689722, 139.691667))
+print(tokyo)
+# City(name=&#39;Tokyo&#39;, title=&#39;下辈子让我做系守的姑娘吧！下辈子让我做东京的帅哥吧！&#39;, popu=36.933, coor=(35.689722, 139.691667))
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>def namedtuple(typename, field_names, *, verbose=False, rename=False, module=None):
+    &#34;&#34;&#34;Returns a new subclass of tuple with named fields.
+
+    &gt;&gt;&gt; Point = namedtuple(&#39;Point&#39;, [&#39;x&#39;, &#39;y&#39;])
+    &gt;&gt;&gt; Point.__doc__                   # docstring for the new class
+    &#39;Point(x, y)&#39;
+    &gt;&gt;&gt; p = Point(11, y=22)             # instantiate with positional args or keywords
+    &gt;&gt;&gt; p[0] + p[1]                     # indexable like a plain tuple
+    33
+    &gt;&gt;&gt; x, y = p                        # unpack like a regular tuple
+    &gt;&gt;&gt; x, y
+    (11, 22)
+    &gt;&gt;&gt; p.x + p.y                       # fields also accessible by name
+    33
+    &gt;&gt;&gt; d = p._asdict()                 # convert to a dictionary
+    &gt;&gt;&gt; d[&#39;x&#39;]
+    11
+    &gt;&gt;&gt; Point(**d)                      # convert from a dictionary
+    Point(x=11, y=22)
+    &gt;&gt;&gt; p._replace(x=100)               # _replace() is like str.replace() but targets named fields
+    Point(x=100, y=22)
+
+    &#34;&#34;&#34;
+
+    # Validate the field names.  At the user&#39;s option, either generate an error
+    # message or automatically replace the field name with a valid name.
+    if isinstance(field_names, str):
+        field_names = field_names.replace(&#39;,&#39;, &#39; &#39;).split()
+    field_names = list(map(str, field_names))
+    typename = str(typename)
+    if rename:
+        seen = set()
+        for index, name in enumerate(field_names):
+            if (not name.isidentifier()
+                or _iskeyword(name)
+                or name.startswith(&#39;_&#39;)
+                or name in seen):
+                field_names[index] = &#39;_%d&#39; % index
+            seen.add(name)
+    for name in [typename] + field_names:
+        if type(name) is not str:
+            raise TypeError(&#39;Type names and field names must be strings&#39;)
+        if not name.isidentifier():
+            raise ValueError(&#39;Type names and field names must be valid &#39;
+                             &#39;identifiers: %r&#39; % name)
+        if _iskeyword(name):
+            raise ValueError(&#39;Type names and field names cannot be a &#39;
+                             &#39;keyword: %r&#39; % name)
+    seen = set()
+    for name in field_names:
+        if name.startswith(&#39;_&#39;) and not rename:
+            raise ValueError(&#39;Field names cannot start with an underscore: &#39;
+                             &#39;%r&#39; % name)
+        if name in seen:
+            raise ValueError(&#39;Encountered duplicate field name: %r&#39; % name)
+        seen.add(name)
+
+    # Fill-in the class template
+    class_definition = _class_template.format(
+        typename = typename,
+        field_names = tuple(field_names),
+        num_fields = len(field_names),
+        arg_list = repr(tuple(field_names)).replace(&#34;&#39;&#34;, &#34;&#34;)[1:-1],
+        repr_fmt = &#39;, &#39;.join(_repr_template.format(name=name)
+                             for name in field_names),
+        field_defs = &#39;\n&#39;.join(_field_template.format(index=index, name=name)
+                               for index, name in enumerate(field_names))
+    )
+
+    # Execute the template string in a temporary namespace and support
+    # tracing utilities by setting a value for frame.f_globals[&#39;__name__&#39;]
+    namespace = dict(__name__=&#39;namedtuple_%s&#39; % typename)
+    exec(class_definition, namespace)
+    result = namespace[typename]
+    result._source = class_definition
+    if verbose:
+        print(result._source)
+
+    # For pickling to work, the __module__ variable needs to be set to the frame
+    # where the named tuple is created.  Bypass this step in environments where
+    # sys._getframe is not defined (Jython for example) or sys._getframe is not
+    # defined for arguments greater than 0 (IronPython), or where the user has
+    # specified a particular module.
+    if module is None:
+        try:
+            module = _sys._getframe(1).f_globals.get(&#39;__name__&#39;, &#39;__main__&#39;)
+        except (AttributeError, ValueError):
+            pass
+    if module is not None:
+        result.__module__ = module
+
+    return result
+</code></pre></td></tr></table></div></div><h4 id=chainmap>ChainMap</h4><p>用来合并多个字典。</p><blockquote><p>应用案例</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import ChainMap
+
+cm = ChainMap(
+    {&#34;Apple&#34;: 18},
+    {&#34;Orange&#34;: 20},
+    {&#34;Mango&#34;: 22},
+    {&#34;pineapple&#34;: 24},
+)
+print(cm)
+# ChainMap({&#39;Apple&#39;: 18}, {&#39;Orange&#39;: 20}, {&#39;Mango&#39;: 22}, {&#39;pineapple&#39;: 24})
+</code></pre></td></tr></table></div></div><blockquote><p>源码</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class ChainMap(MutableMapping):
+    &#39;&#39;&#39; A ChainMap groups multiple dicts (or other mappings) together
+    to create a single, updateable view.
+
+    The underlying mappings are stored in a list.  That list is public and can
+    be accessed or updated using the *maps* attribute.  There is no other
+    state.
+
+    Lookups search the underlying mappings successively until a key is found.
+    In contrast, writes, updates, and deletions only operate on the first
+    mapping.
+
+    &#39;&#39;&#39;
+
+    def __init__(self, *maps):
+        &#39;&#39;&#39;Initialize a ChainMap by setting *maps* to the given mappings.
+        If no mappings are provided, a single empty dictionary is used.
+
+        &#39;&#39;&#39;
+        self.maps = list(maps) or [{}]          # always at least one map
+
+    def __missing__(self, key):
+        raise KeyError(key)
+
+    def __getitem__(self, key):
+        for mapping in self.maps:
+            try:
+                return mapping[key]             # can&#39;t use &#39;key in mapping&#39; with defaultdict
+            except KeyError:
+                pass
+        return self.__missing__(key)            # support subclasses that define __missing__
+
+    def get(self, key, default=None):
+        return self[key] if key in self else default
+
+    def __len__(self):
+        return len(set().union(*self.maps))     # reuses stored hash values if possible
+
+    def __iter__(self):
+        return iter(set().union(*self.maps))
+
+    def __contains__(self, key):
+        return any(key in m for m in self.maps)
+
+    def __bool__(self):
+        return any(self.maps)
+
+    @_recursive_repr()
+    def __repr__(self):
+        return &#39;{0.__class__.__name__}({1})&#39;.format(
+            self, &#39;, &#39;.join(map(repr, self.maps)))
+
+    @classmethod
+    def fromkeys(cls, iterable, *args):
+        &#39;Create a ChainMap with a single dict created from the iterable.&#39;
+        return cls(dict.fromkeys(iterable, *args))
+
+    def copy(self):
+        &#39;New ChainMap or subclass with a new copy of maps[0] and refs to maps[1:]&#39;
+        return self.__class__(self.maps[0].copy(), *self.maps[1:])
+
+    __copy__ = copy
+
+    def new_child(self, m=None):                # like Django&#39;s Context.push()
+        &#39;&#39;&#39;New ChainMap with a new map followed by all previous maps.
+        If no map is provided, an empty dict is used.
+        &#39;&#39;&#39;
+        if m is None:
+            m = {}
+        return self.__class__(m, *self.maps)
+
+    @property
+    def parents(self):                          # like Django&#39;s Context.pop()
+        &#39;New ChainMap from maps[1:].&#39;
+        return self.__class__(*self.maps[1:])
+
+    def __setitem__(self, key, value):
+        self.maps[0][key] = value
+
+    def __delitem__(self, key):
+        try:
+            del self.maps[0][key]
+        except KeyError:
+            raise KeyError(&#39;Key not found in the first mapping: {!r}&#39;.format(key))
+
+    def popitem(self):
+        &#39;Remove and return an item pair from maps[0]. Raise KeyError is maps[0] is empty.&#39;
+        try:
+            return self.maps[0].popitem()
+        except KeyError:
+            raise KeyError(&#39;No keys found in the first mapping.&#39;)
+
+    def pop(self, key, *args):
+        &#39;Remove *key* from maps[0] and return its value. Raise KeyError if *key* not in maps[0].&#39;
+        try:
+            return self.maps[0].pop(key, *args)
+        except KeyError:
+            raise KeyError(&#39;Key not found in the first mapping: {!r}&#39;.format(key))
+
+    def clear(self):
+        &#39;Clear maps[0], leaving maps[1:] intact.&#39;
+        self.maps[0].clear()
+</code></pre></td></tr></table></div></div><h4 id=userdict>UserDict</h4><p>UserDict是 <code>MutableMapping</code> 和 <code>Mapping</code> 的子类，它继承了 <code>MutableMapping.update</code> 和 <code>Mapping.get</code> 两个重要的方法 。</p><blockquote><p>应用案例</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>from collections import UserDict
+
+class DictKeyToStr(UserDict):
+    def __missing__(self, key):
+        if isinstance(key, str):
+            raise KeyError(key)
+        return self[str(key)]
+
+    def __contains__(self, key):
+        return str(key) in self.data
+
+    def __setitem__(self, key, item):
+        self.data[str(key)] = item
+    # 该函数可以不实现
+    &#39;&#39;&#39;
+        def get(self, key, default=None):
+        try:
+            return self[key]
+        except KeyError:
+            return default
+    &#39;&#39;&#39;
+</code></pre></td></tr></table></div></div><blockquote><p>源码</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class UserDict(MutableMapping):
+
+    # Start by filling-out the abstract methods
+    def __init__(*args, **kwargs):
+        if not args:
+            raise TypeError(&#34;descriptor &#39;__init__&#39; of &#39;UserDict&#39; object &#34;
+                            &#34;needs an argument&#34;)
+        self, *args = args
+        if len(args) &gt; 1:
+            raise TypeError(&#39;expected at most 1 arguments, got %d&#39; % len(args))
+        if args:
+            dict = args[0]
+        elif &#39;dict&#39; in kwargs:
+            dict = kwargs.pop(&#39;dict&#39;)
+            import warnings
+            warnings.warn(&#34;Passing &#39;dict&#39; as keyword argument is deprecated&#34;,
+                          DeprecationWarning, stacklevel=2)
+        else:
+            dict = None
+        self.data = {}
+        if dict is not None:
+            self.update(dict)
+        if len(kwargs):
+            self.update(kwargs)
+    def __len__(self): return len(self.data)
+    def __getitem__(self, key):
+        if key in self.data:
+            return self.data[key]
+        if hasattr(self.__class__, &#34;__missing__&#34;):
+            return self.__class__.__missing__(self, key)
+        raise KeyError(key)
+    def __setitem__(self, key, item): self.data[key] = item
+    def __delitem__(self, key): del self.data[key]
+    def __iter__(self):
+        return iter(self.data)
+
+    # Modify __contains__ to work correctly when __missing__ is present
+    def __contains__(self, key):
+        return key in self.data
+
+    # Now, add the methods in dicts but not in MutableMapping
+    def __repr__(self): return repr(self.data)
+    def copy(self):
+        if self.__class__ is UserDict:
+            return UserDict(self.data.copy())
+        import copy
+        data = self.data
+        try:
+            self.data = {}
+            c = copy.copy(self)
+        finally:
+            self.data = data
+        c.update(self)
+        return c
+    @classmethod
+    def fromkeys(cls, iterable, value=None):
+        d = cls()
+        for key in iterable:
+            d[key] = value
+        return d
+</code></pre></td></tr></table></div></div><h3 id=no33-python中的变量与垃圾回收机制>No.33 Python中的变量与垃圾回收机制</h3><p>Python与Java的变量本质上不一样，Python的变量本事是个指针。当Python解释器执行 <code>number=1</code> 的时候，实际上先在内存中创建一个 <code>int</code> 对象，然后将 <code>number</code> 指向这个 <code>int</code> 对象的内存地址，也就是将 <code>number</code> “贴”在 <code>int</code> 对象上，测试用例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>number = [1, 2, 3]
+demo = number
+demo.append(4)
+print(number)
+# [1, 2, 3, 4]
+</code></pre></td></tr></table></div></div><p><code>==</code> 和 <code>is</code> 的区别就是前者判断的值是否相等，后者判断的是对象id值是否相等。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Person(object):
+    pass
+
+p_0 = Person()
+
+p_1 = Person()
+
+print(p_0 is p_1) # False
+print(p_0 == p_1) # False
+print(id(p_0))    # 2972754016464
+print(id(p_1))    # 2972754016408
+
+li_a = [1, 2, 3, 4]
+li_b = [1, 2, 3, 4]
+
+print(li_a is li_b) # False
+print(li_a == li_b) # True
+print(id(li_a))     # 2972770077064
+print(id(li_b))     # 2972769996680
+
+a = 1
+b = 1
+
+print(a is b)  # True
+print(a == b)  # True
+print(id(a))   # 1842179136
+print(id(b))   # 1842179136
+</code></pre></td></tr></table></div></div><p>Python有一个优化机制叫 <code>intern</code> ，像这种经常使用的小整数、小字符串，在运行时就会创建，并且全局唯一。</p><p>Python中的 <code>del</code> 语句并不等同于C++中的 <code>delete</code> ，Python中的 <code>del</code> 是将这个对象的指向删除，当这个对象没有任何指向的时候，Python虚拟机才会删除这个对象。</p><h3 id=no34-python元类编程>No.34 Python元类编程</h3><h4 id=property动态属性>property动态属性</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Home(object):
+
+    def __init__(self, age):
+        self.__age = age
+
+    @property
+    def age(self):
+        return self.__age
+
+if __name__ == &#39;__main__&#39;:
+
+    home = Home(21)
+    print(home.age)   # 21
+</code></pre></td></tr></table></div></div><p>在Python中，为函数添加 <code>@property</code> 装饰器可以使得函数像变量一样访问。</p><h4 id=__getattr__和__getattribute__函数的使用>__getattr__和__getattribute__函数的使用</h4><p>__getattr__在查找属性的时候，找不到该属性就会调用这个函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Demo(object):
+
+    def __init__(self, user, passwd):
+        self.user = user
+        self.password = passwd
+
+    def __getattr__(self, item):
+        return &#39;Not find Attr.&#39;
+
+if __name__ == &#39;__main__&#39;:
+
+    d = Demo(&#39;Bob&#39;, &#39;123456&#39;)
+
+    print(d.User)
+</code></pre></td></tr></table></div></div><p>__getattribute__在调用属性之前会调用该方法。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class Demo(object):
+
+    def __init__(self, user, passwd):
+        self.user = user
+        self.password = passwd
+
+    def __getattr__(self, item):
+        return &#39;Not find Attr.&#39;
+
+    def __getattribute__(self, item):
+        print(&#39;Hello.&#39;)
+
+if __name__ == &#39;__main__&#39;:
+
+    d = Demo(&#39;Bob&#39;, &#39;123456&#39;)
+
+    print(d.User)
+
+# Hello.
+# None
+</code></pre></td></tr></table></div></div><h4 id=属性描述符>属性描述符</h4><p>在一个类中实现 <code>__get__()</code>、<code>__set__()</code> 和 <code>__delete__()</code> 都是属性描述符。</p><blockquote><p>数据属性描述符</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import numbers
+
+class IntField(object):
+
+    def __init__(self):
+        self.v = 0
+
+    def __get__(self, instance, owner):
+        return self.v
+
+    def __set__(self, instance, value):
+        if(not isinstance(value, numbers.Integral)):
+            raise ValueError(&#34;Int value need.&#34;)
+        self.v = value
+
+    def __delete__(self, instance):
+        pass
+</code></pre></td></tr></table></div></div><blockquote><p>非数据属性描述符</p></blockquote><p>在Python的新式类中，对象属性的访问都会调用 <code>__getattribute__()</code> 方法，它允许我们在访问对象时自定义访问行为，值得注意的是小心无限递归的发生。 <code>__getattriubte__()</code> 是所有方法和属性查找的入口，当调用该方法之后会根据一定规则在 <code>__dict__</code> 中查找相应的属性值或者是对象，如果没有找到就会调用 <code>__getattr__()</code> 方法，与之对应的 <code>__setattr__()</code> 和 <code>__delattr__()</code> 方法分别用来自定义某个属性的赋值行为和用于处理删除属性的行为。描述符的概念在Python 2.2中引进， <code>__get__()</code>、<code>__set__()</code>、<code>__delete__()</code> 分别定义取出、设置、删除描述符的值的行为。</p><ul><li>值得注意的是，只要实现这三种方法中的任何一个都是描述符。</li><li>仅实现 <code>__get__（）</code> 方法的叫做非数据描述符，只有在初始化之后才能被读取。</li><li>同时实现 <code>__get__()</code> 和 <code>__set__()</code> 方法的叫做数据描述符，属性是可读写的。</li></ul><h4 id=属性访问的优先规则>属性访问的优先规则</h4><p>对象的属性一般是在 <code>__dict__</code> 中存储，在Python中， <code>__getattribute__()</code> 实现了属性访问的相关规则。</p><p>假定存在实例 <code>obj</code> ，属性 <code>number</code> 在 <code>obj</code> 中的查找过程是这样的：</p><ul><li>搜索基类列表 <code>type(b).__mro__</code> ，直到找到该属性，并赋值给 <code>descr</code> 。</li><li>判断 <code>descr</code> 的类型，如果是数据描述符则调用 <code>descr.__get__(b, type(b))</code> ，并将结果返回。</li><li>如果是其他的（非数据描述符、普通属性、没找到的类型）则查找实例 <code>obj</code> 的实例属性，也就是 <code>obj.__dict__</code> 。</li><li>如果在 <code>obj.__dict__</code> 没有找到相关属性，就会重新回到 <code>descr</code> 的判断上。</li><li>如果再次判断 <code>descr</code> 类型为非数据描述符，就会调用 <code>descr.__get__(b, type(b))</code> ，并将结果返回，结束执行。</li><li>如果 <code>descr</code> 是普通属性，直接就返回结果。</li><li>如果第二次没有找到，为空，就会触发 <code>AttributeError</code> 异常，并且结束查找。</li></ul><p>用流程图表示：</p><p><img class=lazyload src=/svg/loading.min.svg data-src=33f1b89cb9ff2583ad697ef98f89f051.png data-srcset="33f1b89cb9ff2583ad697ef98f89f051.png, 33f1b89cb9ff2583ad697ef98f89f051.png 1.5x, 33f1b89cb9ff2583ad697ef98f89f051.png 2x" data-sizes=auto alt=33f1b89cb9ff2583ad697ef98f89f051.png title=33f1b89cb9ff2583ad697ef98f89f051.png></p><h4 id=__new__-和-__init__-的区别><code>__new__()</code> 和 <code>__init__()</code> 的区别</h4><ul><li><code>__new__()</code> 函数用来控制对象的生成过程，在对象上生成之前调用。</li><li><code>__init__()</code> 函数用来对对象进行完善，在对象生成之后调用。</li><li>如果 <code>__new__()</code> 函数不返回对象，就不会调用 <code>__init__()</code> 函数。</li></ul><h4 id=自定义元类>自定义元类</h4><p>在Python中一切皆对象，类用来描述如何生成对象，在Python中类也是对象，原因是它具备创建对象的能力。当Python解释器执行到 <code>class</code> 语句的时候，就会创建这个所谓类的对象。既然类是个对象，那么就可以动态的创建类。这里我们用到 <code>type()</code> 函数，下面是此函数的构造函数源码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>def __init__(cls, what, bases=None, dict=None): # known special case of type.__init__
+        &#34;&#34;&#34;
+        type(object_or_name, bases, dict)
+        type(object) -&gt; the object&#39;s type
+        type(name, bases, dict) -&gt; a new type
+        # (copied from class doc)
+        &#34;&#34;&#34;
+        pass
+</code></pre></td></tr></table></div></div><p>由此可知， <code>type()</code> 接收一个类的额描述返回一个类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>def bar():
+    print(&#34;Hello...&#34;)
+
+user = type(&#39;User&#39;, (object, ), {
+    &#39;name&#39;: &#39;Bob&#39;,
+    &#39;age&#39;: 20,
+    &#39;bar&#39;: bar,
+})
+
+user.bar()                  # Hello...
+print(user.name, user.age)  # Bob 20
+</code></pre></td></tr></table></div></div><p>元类用来创建类，因为累也是对象。 <code>type()</code> 之所以可以创建类是由于 <code>tyep()</code> 就是个元类，Python中所有的类都由它创建。在Python中，我们可以通过一个对象的 <code>__class__</code> 属性来确定这个对象由哪个类产生，当Python创建一个类的对象的时候，Python将在这个类中查找其 <code>__metaclass__</code> 属性。如果找到了，就用它创建对象，如果没有找到，就去父类中查找，如果还是没有，就去模块中查找，一路下来还没有找到的话，就用 <code>type()</code> 创建。创建元类可以使用下面的写法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>class MetaClass(type):
+    def __new__(cls, *args, **kwargs):
+        return super().__new__(cls, *args, **kwargs)
+
+class User(metaclass=MetaClass):
+    pass
+</code></pre></td></tr></table></div></div><h4 id=使用元类创建api>使用元类创建API</h4><p>元类的主要用途就是创建API，比如Python中的ORM框架。</p><blockquote><p>Python领袖 Tim Peters ：</p></blockquote><blockquote><p>“元类就是深度的魔法，99%的用户应该根本不必为此操心。如果你想搞清楚究竟是否需要用到元类，那么你就不需要它。那些实际用到元类的人都非常清楚地知道他们需要做什么，而且根本不需要解释为什么要用元类。”</p></blockquote><h3 id=no35-迭代器和生成器>No.35 迭代器和生成器</h3><p>当容器中的元素很多的时候，不可能全部读取到内存，那么就需要一种算法来推算下一个元素，这样就不必创建很大的容器，生成器就是这个作用。</p><p>Python中的生成器使用 <code>yield</code> 返回值，每次调用 <code>yield</code> 会暂停，因此生成器不会一下子全部执行完成，是当需要结果时才进行计算，当函数执行到 <code>yield</code> 的时候，会返回值并且保存当前的执行状态，也就是函数被挂起了。我们可以使用 <code>next()</code> 函数和 <code>send()</code> 函数恢复生成器，将列表推导式的 <code>[]</code> 换成 <code>()</code> 就会变成一个生成器：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>my_iter = (x for x in range(10))
+
+for i in my_iter:
+    print(i)
+</code></pre></td></tr></table></div></div><p>值得注意的是，我们一般不会使用 <code>next()</code> 方法来获取元素，而是使用for循环。当使用while循环时，需要捕获 <code>StopIteration</code> 异常的产生。</p><p>Python虚拟机中有一个栈帧的调用栈，栈帧保存了指定的代码的信息和上下文，每一个栈帧都有自己的数据栈和块栈，由于这些栈帧保存在堆内存中，使得解释器有中断和恢复栈帧的能力：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>import inspect
+
+frame = None
+
+def foo():
+    global frame
+    frame = inspect.currentframe()
+
+def bar():
+    foo()
+
+bar()
+
+print(frame.f_code.co_name)        # foo
+print(frame.f_back.f_code.co_name) # bar
+</code></pre></td></tr></table></div></div><p>这也是生成器存在的基础。只要我们在任何地方获取生成器对象，都可以开始或暂停生成器，因为栈帧是独立于调用者而存在的，这也是协程的理论基础。</p><p>迭代器是一种不同于for循环的访问集合内元素的一种方式，一般用来遍历数据，迭代器提供了一种惰性访问数据的方式。</p><p>可以使用for循环的有以下几种类型：</p><ul><li>集合数据类型</li><li>生成器，包括生成器和带有 <code>yield</code> 的生成器函数</li></ul><p>这些可以直接被for循环调用的对象叫做可迭代对象，可以使用 <code>isinstance()</code> 判断一个对象是否为可 <code>Iterable</code> 对象。集合数据类型如 <code>list</code>、<code>dict</code>、<code>str</code> 等是 <code>Iterable</code> 但不是 <code>Iterator</code> ，可以通过 <code>iter()</code> 函数获得一个 <code>Iterator</code> 对象。 <code>send()</code> 和 <code>next()</code> 的区别就在于 <code>send()</code> 可传递参数给 <code>yield()</code> 表达式，这时候传递的参数就会作为 <code>yield</code> 表达式的值，而 <code>yield</code> 的参数是返回给调用者的值，也就是说 <code>send</code> 可以强行修改上一个yield表达式值。</p><div class="details admonition note open"><div class="details-summary admonition-title"><i class="icon fas fa-pencil-alt fa-fwnote"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i></div><div class=details-content><div class=admonition-content>本文最后更新于 <span class=timeago datetime=2020-11-09T11:06:17 title="November 9, 2020">November 9, 2020</span>，文中内容可能已过时，请谨慎使用。</div></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2020-11-09</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/PythonTrick2/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2 data-via=Linerzore data-hashtags=Python,Trick><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=http://KiLien.github.io/PythonTrick2/ data-hashtag=Python><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=http://KiLien.github.io/PythonTrick2/ data-title=Python技巧2><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/Python/>Python</a>,&nbsp;<a href=/tags/Trick/>Trick</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/LeetCode-821-%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%9D%E7%A6%BB/ class=prev rel=prev title=LeetCode-821-字符的最短距离><i class="fas fa-angle-left fa-fw"></i>LeetCode-821-字符的最短距离</a>
+<a href=/LeetCode-160%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/ class=next rel=next title=LeetCode-160-相交链表>LeetCode-160-相交链表<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.84.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>Kilien</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div><div class=sidebar_wo id=right-wind-chimes><img class=wind-chimes-img src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes1.png alt=左风铃 onmouseover="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes2.png'" onmouseout="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes1.png'" title=回到顶部></div><div class=sidebar_wo id="left-wind-chimes "><img class=wind-chimes-img src=https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes3.png alt=右风铃 onmouseover="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes4.png'" onmouseout="this.src='https://cdn.jsdelivr.net/gh/KiLien/Pics/img/WindChimes3.png'" title=回到底部></div></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:20},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"Comment",lightTheme:"github-light",repo:"KiLien/KiLien.github.io"}},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},lightGallery:{actualSize:!1,exThumbImage:"data-thumbnail",hideBarsDelay:2e3,selector:".lightgallery",speed:400,thumbContHeight:80,thumbWidth:80,thumbnail:!0},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js></script><script type=text/javascript src=/js/custom.js></script><script>var avatar_plug,avatar_click;$(function(){$(".site-avatar-plug-bilibili").attr("src","https://cdn.jsdelivr.net/gh/KiLien/Pics@master/avatar-plug/bilibili_"+(~~(57*Math.random())+1)+".png")}),avatar_plug=0,avatar_click=1,jQuery(document).ready(function(a){var b=1,c=57;a("div.home-avatar a").click(function(d){avatar_click%b===0&&(avatar_plug++,a(".site-avatar-plug-bilibili").attr("src","https://cdn.jsdelivr.net/gh/KiLien/Pics@master/avatar-plug/bilibili_"+avatar_plug+".png")),avatar_plug===c&&(avatar_plug=0),a("div.home-avatar a").attr("alt","再点击"+(b-avatar_click%b)+"次头像试试看~~"),avatar_click++})})</script></body></html>
