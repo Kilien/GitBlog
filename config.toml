@@ -60,8 +60,8 @@ theme = "LoveIt"
     title = ""
     weight = 3
   [[menu.main]]
-    pre = "<i class='fas fa-fw fa-fan fa-spin'></i>"
-    name = "BBer"
+    pre = "<i class='fas fa-comment'></i>"
+    name = "言语"
     identifier = "bb"
     url = "/bb/"
     weight = 6

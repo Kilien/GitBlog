@@ -5,6 +5,10 @@
 
 {{- if $comment.enable -}}
     <div id="comments">
+        
+        <text class="poem_sentence"></text>
+        <text class="poem_info"></text>
+
         {{- /* Disqus Comment System */ -}}
         {{- $disqus := $comment.disqus | default dict -}}
         {{- if $disqus.enable -}}

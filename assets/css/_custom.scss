@@ -221,3 +221,17 @@ img.site-avatar-plug-bilibili {
     transform: rotateZ(-360deg);
   }
 }
+
+/* 评论 */
+#comments {
+  padding: 4rem 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .poem_sentence {
+    color: #A7A7A9;
+  }
+  .poem_info {
+    color: #A7A7A9;
+  }
+}
