@@ -23,12 +23,3 @@ $(function() {
       $(".top-scroll-bar").attr("style", "width: " + ($(this).scrollTop() / ($(document).height() - $(this).height()) * 100) + "%; display: block;");
     });
   }); 
-
-/* 评论 */
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-jinrishici.load(function(result) {
-	var sentence = document.querySelector(".poem_sentence")
-	var info = document.querySelector(".poem_info")
-	sentence.innerHTML = result.data.content
-	info.innerHTML = '——' + result.data.origin.author
-});
