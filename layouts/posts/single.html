@@ -52,7 +52,7 @@
                 {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
                     <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="{{ . }}">{{ . }}</time>&nbsp;
                 {{- end -}}
-                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}
                 <i class="far fa-clock fa-fw"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
                 {{- $comment := .Scratch.Get "comment" | default dict -}}
                 {{- if $comment.enable | and $comment.valine.enable | and $comment.valine.visitor -}}
@@ -60,7 +60,16 @@
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
                 {{- end -}}
+                {{- if $comment.enable | and $comment.waline.enable | and $comment.waline.visitor -}}
+                    <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
+                    </span>&nbsp;
+					<a href="#comments" id="post-meta-vcount" title="{{ T `viewComments` }}">
+						<i class="fas fa-comment fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-comment-count"></span>&nbsp;条评论
+					</a>
+                {{- end -}}
             </div>
+
         </div>
 
         {{- /* Featured image */ -}}

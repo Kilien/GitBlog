@@ -404,13 +404,13 @@ theme = "LoveIt"
       # Waline comment config (https://waline.js.org/)
       # Waline 评论系统设置 (https://waline.js.org/)
       [params.page.comment.waline]
-        enable = false
+        enable = true
         #js = "https://cdn.jsdelivr.net/npm/@waline/client@latest"
         js = "https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"
         meta = ['nick','mail','link']                           # 评论者相关属性
         requiredFields = ['nick','mail']                        # 设置必填项，默认匿名
-        placeholder = "提交评论较慢，请等待几秒~"              	# 评论框占位提示符
-        serverURL = ""                 							# Waline的服务端地址（必填） 
+        placeholder = "提交评论较慢，请等待几秒~"              	    # 评论框占位提示符
+        serverURL = "https://blog-comment-tau.vercel.app/"      # Waline的服务端地址（必填） 
         #imageHosting =                                         # 图床api，如果允许评论框上传图片
         avatar = "retro"                                        # Gravatar头像
         avatarCDN = "https://sdn.geekzu.org/avatar/"            # Gravatar头像CDN地址，不建议使用loli源
@@ -440,7 +440,7 @@ theme = "LoveIt"
         enable = false
       #  Utterances 评论系统设置
       [params.page.comment.utterances]
-        enable = true
+        enable = false
         # owner/repo
         repo = "KiLien/KiLien.github.io"
         issueTerm = "pathname"
