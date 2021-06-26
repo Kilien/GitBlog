@@ -222,16 +222,14 @@ img.site-avatar-plug-bilibili {
   }
 }
 
-/* 评论 */
 #comments {
-  padding: 4rem 0 2rem;
+  padding: 5rem 0 2rem;
+}
+/* 今日诗词 */
+.one-day {
   display: flex;
   align-items: center;
   justify-content: center;
-  .poem_sentence {
-    color: #A7A7A9;
-  }
-  .poem_info {
-    color: #A7A7A9;
-  }
+  margin-top: 2rem;
+  color: #a7a7a7;
 }
