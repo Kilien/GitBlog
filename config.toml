@@ -414,6 +414,10 @@ theme = "LoveIt"
         #imageHosting =                                         # 图床api，如果允许评论框上传图片
         avatar = "retro"                                        # Gravatar头像
         avatarCDN = "https://sdn.geekzu.org/avatar/"            # Gravatar头像CDN地址，不建议使用loli源
+        emoji = [
+          'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+          'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        ]                                                      # emoji ：Twitter、Bilibili
         pageSize = 10                                           # 评论列表分页，每页条数
         lang = "zh-CN"                                          # 多语言支持
         visitor = true                                          # 文章访问量统计
