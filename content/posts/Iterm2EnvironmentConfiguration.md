@@ -179,6 +179,13 @@ vi ~/.zshrc
 
 {{< image src="https://cdn.jsdelivr.net/gh/KiLien/Pics/iShot/iterm-3.png" caption="示例" >}}
 
+### 隐藏用户名和主机名
+有时候我们的用户名和主机名太长，比如我的kilien@kilienMacBook-Pro，终端显示的时候会很不好看，我们可以手动去除。
+
+编辑 `vim ~/.zshrc` 文件，增加 `DEFAULT_USER="kilien"` 配置，可在文本最好追加。
+
+我们可以通过 `whoami` 命令，查看当前用户。
+
 
 {{< admonition type=tip title="参考链接" open=true >}}
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
